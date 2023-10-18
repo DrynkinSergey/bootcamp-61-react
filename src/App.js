@@ -1,15 +1,15 @@
+import 'modern-normalize'
+import { Card } from './components/Card'
+import { Header } from './components/Header'
+import { Content } from './components/Content'
+import { Footer } from './components/Footer'
+
 function App() {
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-					<h1>Hello react !!!</h1>
-				</p>
-				<a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
-					Learn React
-				</a>
-			</header>
+		<div>
+			<Header />
+			<Content />
+			<Footer />
 		</div>
 	)
 }
