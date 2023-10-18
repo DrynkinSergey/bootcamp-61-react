@@ -1,5 +1,4 @@
 export const Section = props => {
-	console.log(props)
 	const { title = 'Default value', data = [] } = props
 
 	return (
