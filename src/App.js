@@ -40,7 +40,7 @@ function App() {
 	]
 	return (
 		<div>
-			<Section title='Movies' data={moviesData} />
+			<Section title='Favourites films' data={moviesData} />
 			<Section title='Goods' data={goodsData} />
 		</div>
 	)
