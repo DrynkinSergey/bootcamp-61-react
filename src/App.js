@@ -1,15 +1,47 @@
 import 'modern-normalize'
-import { Card } from './components/Card'
-import { Header } from './components/Header'
-import { Content } from './components/Content'
-import { Footer } from './components/Footer'
+import { Section } from './components/Section'
 
 function App() {
+	const moviesData = [
+		{
+			id: 1,
+			title: 'Batman',
+		},
+		{
+			id: 2,
+			title: 'Terminator',
+		},
+		{
+			id: 5,
+			title: 'Titanic',
+		},
+		{
+			id: 3,
+			title: 'Taxi',
+		},
+		{
+			id: 4,
+			title: 'Tom & Jerry',
+		},
+	]
+	const goodsData = [
+		{
+			id: 1,
+			title: 'Carrots',
+		},
+		{
+			id: 3,
+			title: 'Carrots',
+		},
+		{
+			id: 2,
+			title: 'Milk',
+		},
+	]
 	return (
 		<div>
-			<Header />
-			<Content />
-			<Footer />
+			<Section title='Movies' data={moviesData} />
+			<Section title='Goods' data={goodsData} />
 		</div>
 	)
 }
