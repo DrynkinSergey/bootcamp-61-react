@@ -1,4 +1,5 @@
 import 'modern-normalize'
+import s from './App.module.css'
 import { Section } from './components/Section/Section'
 import { Button } from './components/Button'
 import { Modal } from './components/Modal'
@@ -45,8 +46,8 @@ function App() {
 	]
 	const isOnline = true
 	return (
-		<div>
-			<Section message='Hello' title='Favourites films' data={moviesData} />
+		<div className={s.wrapper}>
+			<Section primary message='Hello' title='Favourites films' data={moviesData} />
 			<Section title='Goods' data={goodsData} />
 			<h1 className='title'>{isOnline ? 'Online' : 'Offline'}</h1>
 			<h2>{isOnline && 'Welcome back'}</h2>
@@ -64,6 +65,7 @@ function App() {
 				<Modal title='Продаж та реклама'>
 					<h2>Продам диван</h2>
 					<img
+						className={s.modalImg}
 						alt='sofa'
 						src='https://krovato.com/image/cache/catalog/izobrazhenie_viber_2022-04-20_13-53-05-574-1200x900.jpg'
 					/>

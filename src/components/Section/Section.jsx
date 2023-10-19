@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types'
 import css from './Section.module.css'
+import clsx from 'clsx'
 export const Section = props => {
-	const { title = 'Default value', data = [], message } = props
+	const { title = 'Default value', data = [], message, primary } = props
 
 	return (
 		<section>
-			<h1 className={css.title}>{title}</h1>
+			<h1
+				className={clsx(css.title, css.italic, {
+					[css.bigText]: primary,
+					[css.minText]: !primary,
+				})}
+			>
+				{title}
+			</h1>
 			{message && <h2>{message}</h2>}
 			<hr />
 			{data.length > 0 ? (

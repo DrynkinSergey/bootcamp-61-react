@@ -1,0 +1,30 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  @media (max-width:768px){
+    background-color: yellow;
+  }
+  & div {
+    width: 50%;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
+}
+.name{
+  text-align: center;
+  font-weight: bold;
+}
+.email{
+  color:teal;
+  font-size: 1.4rem;
+}
+.bio{
+  color:tomato;
+}

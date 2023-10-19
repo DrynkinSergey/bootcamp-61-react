@@ -23,3 +23,12 @@
   font-style: italic;
   box-shadow: 2px 2px 5px 2px gray;
 }
+.italic{
+  font-style: italic;
+}
+.bigText{
+  font-size: 2rem;
+}
+.minText{
+  font-size: 1rem;
+}

@@ -1,0 +1,9 @@
+.modalImg {
+  width: 400px;
+  height: 400px;
+}
+.wrapper{
+  @media (max-width: 768px){
+    background-color: lightgray;
+  }
+}
