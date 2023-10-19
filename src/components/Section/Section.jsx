@@ -1,29 +1,25 @@
 import PropTypes from 'prop-types'
-import css from './Section.module.css'
-import clsx from 'clsx'
+import { StyledCard, StyledDataList, StyledTitle } from './Section.styled'
+import { StyledButton } from '../../styles/Global'
 export const Section = props => {
 	const { title = 'Default value', data = [], message, primary } = props
 
 	return (
 		<section>
-			<h1
-				className={clsx(css.title, css.italic, {
-					[css.bigText]: primary,
-					[css.minText]: !primary,
-				})}
-			>
-				{title}
-			</h1>
+			<StyledTitle $primary={primary}>{title}</StyledTitle>
 			{message && <h2>{message}</h2>}
 			<hr />
 			{data.length > 0 ? (
-				<ul className={css.list}>
-					{data.map(item => (
-						<li className={css.item} key={item.id}>
-							{item.id}. {item.title} <button>Delete</button>
-						</li>
+				<StyledDataList>
+					{data.map((item, idx) => (
+						<StyledCard $index={idx} key={item.id}>
+							{item.id}. {item.title}{' '}
+							<StyledButton $size='1.2rem' $bgColor='teal'>
+								Delete
+							</StyledButton>
+						</StyledCard>
 					))}
-				</ul>
+				</StyledDataList>
 			) : (
 				<h2>No data</h2>
 			)}

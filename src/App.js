@@ -6,6 +6,7 @@ import { Modal } from './components/Modal'
 import { PropTypesTest } from './components/PropTypesTest'
 import { UserCard } from './components/UserCard/UserCard'
 import userData from './assets/users.json'
+import { Article } from './components/Article/Article'
 
 function App() {
 	const moviesData = [
@@ -48,7 +49,7 @@ function App() {
 	return (
 		<div className={s.wrapper}>
 			<Section primary message='Hello' title='Favourites films' data={moviesData} />
-			<Section title='Goods' data={goodsData} />
+			<Section primary title='Goods' data={goodsData} />
 			<h1 className='title'>{isOnline ? 'Online' : 'Offline'}</h1>
 			<h2>{isOnline && 'Welcome back'}</h2>
 			<h2>{isOnline || 'Lets login'}</h2>
@@ -78,6 +79,7 @@ function App() {
 
 			<PropTypesTest array={['a', 'b']} num='2' typeOfMovie='drama' />
 			<UserCard {...userData[1]} />
+			<Article />
 		</div>
 	)
 }
