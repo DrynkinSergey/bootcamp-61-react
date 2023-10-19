@@ -5,6 +5,7 @@ import { Modal } from './components/Modal'
 import { PropTypesTest } from './components/PropTypesTest'
 import { UserCard } from './components/UserCard/UserCard'
 import userData from './assets/users.json'
+
 function App() {
 	const moviesData = [
 		{
