@@ -1,0 +1,10 @@
+.button{
+  padding: 10px 14px;
+  background: white;
+  border: 1px solid;
+  color: red;
+  font-weight: bold;
+}
+.title{
+  color:green;
+}

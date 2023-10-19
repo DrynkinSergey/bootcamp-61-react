@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types'
-
+import css from './Section.module.css'
 export const Section = props => {
 	const { title = 'Default value', data = [], message } = props
 
 	return (
 		<section>
-			<h1>{title}</h1>
+			<h1 className={css.title}>{title}</h1>
 			{message && <h2>{message}</h2>}
 			<hr />
 			{data.length > 0 ? (
-				<ul>
+				<ul className={css.list}>
 					{data.map(item => (
-						<li key={item.id}>
+						<li className={css.item} key={item.id}>
 							{item.id}. {item.title} <button>Delete</button>
 						</li>
 					))}

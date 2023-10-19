@@ -1,5 +1,5 @@
 import 'modern-normalize'
-import { Section } from './components/Section'
+import { Section } from './components/Section/Section'
 import { Button } from './components/Button'
 import { Modal } from './components/Modal'
 import { PropTypesTest } from './components/PropTypesTest'
@@ -48,7 +48,7 @@ function App() {
 		<div>
 			<Section message='Hello' title='Favourites films' data={moviesData} />
 			<Section title='Goods' data={goodsData} />
-			<h1>{isOnline ? 'Online' : 'Offline'}</h1>
+			<h1 className='title'>{isOnline ? 'Online' : 'Offline'}</h1>
 			<h2>{isOnline && 'Welcome back'}</h2>
 			<h2>{isOnline || 'Lets login'}</h2>
 			<Button>
