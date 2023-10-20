@@ -12,7 +12,7 @@ export const TodoList = () => {
 					<StyledButton>Add</StyledButton>
 				</Flex>
 				{todos.map(item => (
-					<StyledTodo>
+					<StyledTodo key={item.id}>
 						<input type='checkbox' />
 						<span>{item.todo}</span>
 						<StyledButton size='18px'>Delete</StyledButton>

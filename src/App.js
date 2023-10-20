@@ -7,8 +7,8 @@ const App = () => {
 	return (
 		<div>
 			<Counter />
-			<ColorPicker colors={colors} />
-			<TodoList />
+			{/* <ColorPicker colors={colors} /> */}
+			{/* <TodoList /> */}
 		</div>
 	)
 }
