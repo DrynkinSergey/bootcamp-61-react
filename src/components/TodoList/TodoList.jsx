@@ -29,10 +29,6 @@ export class TodoList extends Component {
 		}
 	}
 	handleToggleTodo = id => {
-		console.log('RERENDER')
-		// this.setState(prev => ({
-		// 	todos: prev.todos.map(item => (item.id === id ? { ...item, completed: !item.completed } : item)),
-		// }))
 		this.setState(prev => ({
 			todos: prev.todos.map(item => {
 				if (item.id === id) {
@@ -59,7 +55,7 @@ export class TodoList extends Component {
 	}
 
 	render() {
-		const { todos, newTodoText, filterStr } = this.state
+		const { newTodoText, filterStr } = this.state
 		const filteredData = this.getFilteredData()
 		return (
 			<div>
