@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { StyledInput } from '../RegisterForm/RegisterForm.styled'
-import { Flex } from '../../styles/GlobalStyles'
+import { Flex } from '../Counter/Counter.styled'
 
 const skilsList = ['all', 'react', 'angular', 'vue']
 
@@ -19,11 +19,7 @@ export const EmployeesFilter = () => {
 			<Flex $height='100px' $items='center'>
 				{skilsList.map(radioButtonName => (
 					<label key={radioButtonName}>
-						<input
-							name='radioButtonName'
-							type='radio'
-							value={radioButtonName}
-						/>
+						<input name='radioButtonName' type='radio' value={radioButtonName} />
 						<span> {radioButtonName}</span>
 					</label>
 				))}
