@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { StyledButton } from '../Counter/Counter.styled'
 import { MdWork, MdWorkOff } from 'react-icons/md'
 import { AlertCircle } from 'lucide-react'
-export const EmployeeCard = ({ onDeleteUser, id, name, email, bio, skills, isOpenToWork }) => {
+export const EmployeeCard = ({ handleEditUser, onDeleteUser, id, name, email, bio, skills, isOpenToWork }) => {
 	return (
-		<UserCard $bg={isOpenToWork}>
+		<UserCard onClick={() => handleEditUser({ id, name: prompt('Enter userName:') })} $bg={isOpenToWork}>
 			<h3 style={{ gap: '10px', display: 'flex', alignItems: 'center' }}>
 				{name}
 				{isOpenToWork ? <WorkIcon /> : <MdWorkOff className='workOff' />}

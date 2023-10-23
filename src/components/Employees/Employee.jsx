@@ -3,6 +3,8 @@ import { EmployeeList } from './EmployeeList'
 import userData from './../../assets/users.json'
 import { Component } from 'react'
 import { getFilteredData } from '../../helpers/getFilteredData'
+import AddUserForm from './AddUserForm'
+import { nanoid } from 'nanoid'
 
 // Create state
 // Add delete func
@@ -31,6 +33,13 @@ export class Employee extends Component {
 		console.log(activeSkill)
 		this.setState({ activeSkill })
 	}
+	handleAddUser = user => {
+		this.setState(prev => ({ users: [...prev.users, { ...user, id: nanoid() }] }))
+	}
+
+	handleEditUser = ({ name, id }) => {
+		this.setState(prev => ({ users: prev.users.map(user => (user.id === id ? { ...user, name } : user)) }))
+	}
 
 	render() {
 		const { filter, users, isAvailable, activeSkill } = this.state
@@ -45,7 +54,8 @@ export class Employee extends Component {
 					onChangeAvailable={this.handleChangeIsAvailable}
 					onChangeFilter={this.handleChangeFilter}
 				/>
-				<EmployeeList onDeleteUser={this.handleDeleteUser} users={filteredData} />
+				<AddUserForm handleAddUser={this.handleAddUser} />
+				<EmployeeList handleEditUser={this.handleEditUser} onDeleteUser={this.handleDeleteUser} users={filteredData} />
 			</>
 		)
 	}
