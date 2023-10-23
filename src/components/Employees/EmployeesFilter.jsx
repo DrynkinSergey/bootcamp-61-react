@@ -5,12 +5,12 @@ import { Flex } from '../Counter/Counter.styled'
 
 const skilsList = ['all', 'react', 'angular', 'vue']
 
-export const EmployeesFilter = () => {
+export const EmployeesFilter = ({ filter, onChangeFilter }) => {
 	return (
 		<Filters>
 			<h1>Filters</h1>
 			<Flex $height='100px' $items='center'>
-				<StyledInput type='text' />
+				<StyledInput type='text' onChange={e => onChangeFilter(e.target.value)} value={filter} />
 				<label htmlFor=''>
 					<input type='checkbox' />
 					<span> isAvailable</span>
