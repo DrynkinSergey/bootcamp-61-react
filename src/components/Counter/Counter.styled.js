@@ -17,9 +17,12 @@ export const StyledButton = styled.button`
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
 
-	&:hover {
+	&:hover:not(:disabled) {
 		background-color: #091ec2;
 		color: white;
+	}
+	&:disabled {
+		background-color: tomato;
 	}
 `
 export const CounterStyled = styled.h1`

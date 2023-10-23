@@ -31,12 +31,6 @@ export class RegisterFormControlled extends Component {
 			this.setState(prev => ({ agree: !prev.agree }))
 			return
 		}
-		// if (name === 'name') {
-		// 	this.setState({ name: value })
-		// }
-		// if (name === 'email') {
-		// 	this.setState({ email: value })
-		// }
 		this.setState({ [name]: value })
 	}
 

@@ -5,8 +5,8 @@ import { RegisterFormControlled } from './components/RegisterForm/RegisterFormCo
 const App = () => {
 	return (
 		<div>
-			{/* <Employee /> */}
-			<RegisterFormControlled />
+			<Employee />
+			{/* <RegisterFormControlled /> */}
 		</div>
 	)
 }
