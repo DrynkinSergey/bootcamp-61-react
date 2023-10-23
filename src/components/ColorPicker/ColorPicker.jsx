@@ -6,9 +6,7 @@ export class ColorPicker extends React.Component {
 		colors: this.props.colors,
 		currentColor: 'white',
 	}
-	// Приймаємо колір через параметр
 	handleChangeColor = color => {
-		// Встановлюємо поточний колір в стейт
 		this.setState({ currentColor: color })
 	}
 	render() {

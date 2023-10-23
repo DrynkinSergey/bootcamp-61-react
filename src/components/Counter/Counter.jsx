@@ -5,26 +5,13 @@ export class Counter extends React.Component {
 	state = {
 		counter: 0,
 		step: 1,
-		//Може мати бьдь яку кількість властивостей
-		user: 'Alex',
-		amount: 12000,
-		info: {
-			address: 'Kyiv',
-			country: 'Ukraine',
-		},
 	}
 
 	handleIncrement = () => {
-		// this.state.counter += 1
-		// this.setState({ counter: this.state.counter + 1 })
-		// this.setState({ counter: this.state.counter + 1 })
-		// this.setState({ counter: this.state.counter + 1 })
-
 		this.setState(prevState => ({ counter: prevState.counter + prevState.step }))
 	}
 	handleDecrement = () => {
 		if (this.state.counter !== 0) {
-			// this.setState({ counter: this.state.counter - 1 })
 			this.setState(prev => ({ counter: prev.counter - prev.step }))
 		}
 	}
@@ -36,7 +23,6 @@ export class Counter extends React.Component {
 	}
 
 	render() {
-		console.log('render')
 		return (
 			<FlexContainer>
 				<StyledCounter>
@@ -52,22 +38,3 @@ export class Counter extends React.Component {
 		)
 	}
 }
-
-// export const Counter = () => {
-// 	const handleClear = e => {
-// 		console.log(e)
-// 	}
-
-// 	return (
-// 		<FlexContainer>
-// 			<StyledCounter>
-// 				<h1>{0}</h1>
-// 				<Flex>
-// 					<StyledButton onClick={() => alert('Minus')}>minus</StyledButton>
-// 					<StyledButton onClick={handleClear}>reset</StyledButton>
-// 					<StyledButton onClick={() => console.log('hello')}>plus</StyledButton>
-// 				</Flex>
-// 			</StyledCounter>
-// 		</FlexContainer>
-// 	)
-// }
