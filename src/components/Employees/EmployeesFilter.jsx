@@ -5,21 +5,34 @@ import { Flex } from '../Counter/Counter.styled'
 
 const skilsList = ['all', 'react', 'angular', 'vue']
 
-export const EmployeesFilter = ({ filter, onChangeFilter }) => {
+export const EmployeesFilter = ({
+	filter,
+	activeSkill,
+	isAvailable,
+	onChangeFilter,
+	onChangeAvailable,
+	onChangeSkill,
+}) => {
 	return (
 		<Filters>
 			<h1>Filters</h1>
 			<Flex $height='100px' $items='center'>
 				<StyledInput type='text' onChange={e => onChangeFilter(e.target.value)} value={filter} />
 				<label htmlFor=''>
-					<input type='checkbox' />
+					<input type='checkbox' checked={isAvailable} onChange={onChangeAvailable} />
 					<span> isAvailable</span>
 				</label>
 			</Flex>
 			<Flex $height='100px' $items='center'>
 				{skilsList.map(radioButtonName => (
 					<label key={radioButtonName}>
-						<input name='radioButtonName' type='radio' value={radioButtonName} />
+						<input
+							name='radioButtonName'
+							type='radio'
+							value={radioButtonName}
+							onChange={() => onChangeSkill(radioButtonName)}
+							checked={radioButtonName === activeSkill}
+						/>
 						<span> {radioButtonName}</span>
 					</label>
 				))}
