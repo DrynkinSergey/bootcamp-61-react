@@ -2,9 +2,11 @@ import styled from 'styled-components'
 
 export const ModalWrapper = styled.div`
 	position: fixed;
+
 	inset: 0;
 	display: flex;
 	justify-content: center;
+	overflow-y: scroll;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(10px);

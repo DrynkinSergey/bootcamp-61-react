@@ -24,6 +24,9 @@ export class Employee extends Component {
 		if (users?.length) {
 			this.setState({ users })
 		}
+		// setTimeout(() => {
+		// 	this.handleToggleModal()
+		// }, 4000)
 	}
 	componentDidUpdate(_, prevState) {
 		if (prevState.users !== this.state.users) {
