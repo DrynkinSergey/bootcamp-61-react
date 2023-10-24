@@ -12,7 +12,7 @@ export class Counter extends React.Component {
 		toast.success('Comonent was mount')
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(_, prevState) {
 		console.log('Update')
 		// console.log(prevProps)
 		// console.log(prevState)
