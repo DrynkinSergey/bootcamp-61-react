@@ -1,10 +1,30 @@
 import React from 'react'
 import { Flex, FlexContainer, StyledButton, StyledCounter } from './Counter.styled'
+import { toast } from 'react-toastify'
 
 export class Counter extends React.Component {
 	state = {
 		counter: 0,
 		step: 1,
+	}
+	componentDidMount() {
+		console.log('Mount')
+		toast.success('Comonent was mount')
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log('Update')
+		// console.log(prevProps)
+		// console.log(prevState)
+		if (prevState.counter !== this.state.counter) {
+			// toast.info('Comonent was updated')
+		}
+		if (prevState.step !== this.state.step) {
+			toast.info('Step was updated')
+		}
+		if (this.state.counter === 5) {
+			toast.warning('Please stop!')
+		}
 	}
 
 	handleIncrement = () => {
