@@ -5,6 +5,7 @@ import { Component } from 'react'
 import { getFilteredData } from '../../helpers/getFilteredData'
 import AddUserForm from './AddUserForm'
 import { nanoid } from 'nanoid'
+import Modal from '../Modal/Modal'
 
 // Create state
 // Add delete func
@@ -15,6 +16,7 @@ export class Employee extends Component {
 		filter: '',
 		isAvailable: false,
 		activeSkill: 'all',
+		isOpen: false,
 	}
 	componentDidMount() {
 		console.log('Users already done!')
@@ -31,6 +33,12 @@ export class Employee extends Component {
 			window.localStorage.setItem('filter', JSON.stringify(this.state.filter))
 		}
 	}
+
+	handleToggleModal = () => {
+		this.setState(prev => ({ isOpen: !prev.isOpen }))
+	}
+	//true => !true === false
+	//false => !false === true
 
 	handleDeleteUser = id => {
 		console.log(id)
@@ -60,7 +68,7 @@ export class Employee extends Component {
 	}
 
 	render() {
-		const { filter, users, isAvailable, activeSkill } = this.state
+		const { filter, users, isAvailable, activeSkill, isOpen } = this.state
 		const filteredData = getFilteredData({ users, filter, isAvailable, activeSkill })
 		return (
 			<>
@@ -73,6 +81,12 @@ export class Employee extends Component {
 					onChangeFilter={this.handleChangeFilter}
 				/>
 				<AddUserForm handleAddUser={this.handleAddUser} />
+				<button onClick={this.handleToggleModal}>Show Modal</button>
+				{isOpen ? (
+					<Modal close={this.handleToggleModal}>
+						<h1>Продам холодильник</h1>
+					</Modal>
+				) : null}
 				<EmployeeList handleEditUser={this.handleEditUser} onDeleteUser={this.handleDeleteUser} users={filteredData} />
 			</>
 		)

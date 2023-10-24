@@ -6,10 +6,10 @@ import { TodoList } from './components/TodoList/TodoList'
 const App = () => {
 	return (
 		<div>
-			{/* <Employee /> */}
+			<Employee />
 			{/* <RegisterForm /> */}
 			{/* <Counter /> */}
-			<TodoList />
+			{/* <TodoList /> */}
 		</div>
 	)
 }
