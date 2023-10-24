@@ -10,7 +10,7 @@ export const StyledLoginForm = styled.form`
 	border: 3px solid lightblue;
 	background-color: #71b4f7;
 	box-shadow: 3px 4px 7px 3px lightgray;
-	width: calc((10vh + 20vw) * 1.2);
+	width: calc((10vh + 20vw) * 2.2);
 	padding: 40px 20px;
 	border-radius: 12px;
 `
