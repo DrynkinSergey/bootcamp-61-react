@@ -13,6 +13,19 @@ export class TodoList extends Component {
 		newTodoText: '',
 		filterStr: '',
 	}
+	componentDidMount() {
+		console.log('Mount')
+		const todos = JSON.parse(window.localStorage.getItem('todos'))
+		if (todos.length) {
+			this.setState({ todos })
+		}
+	}
+	componentDidUpdate(_, prevState) {
+		const { todos } = this.state
+		if (prevState.todos !== todos) {
+			window.localStorage.setItem('todos', JSON.stringify(todos))
+		}
+	}
 
 	handleDeleteTodo = id => {
 		console.log(id)

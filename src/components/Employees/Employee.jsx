@@ -23,9 +23,12 @@ export class Employee extends Component {
 			this.setState({ users })
 		}
 	}
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(_, prevState) {
 		if (prevState.users !== this.state.users) {
 			window.localStorage.setItem('users', JSON.stringify(this.state.users))
+		}
+		if (prevState.filter !== this.state.filter) {
+			window.localStorage.setItem('filter', JSON.stringify(this.state.filter))
 		}
 	}
 
@@ -35,7 +38,10 @@ export class Employee extends Component {
 	}
 
 	handleChangeFilter = filter => {
+		// async operation
 		this.setState({ filter })
+		// sync operation
+		// window.localStorage.setItem('filter', JSON.stringify(this.state.filter))
 	}
 
 	handleChangeIsAvailable = () => {
