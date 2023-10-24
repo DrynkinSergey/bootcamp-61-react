@@ -5,29 +5,15 @@ import { MdWork, MdWorkOff } from 'react-icons/md'
 import { AlertCircle } from 'lucide-react'
 export const EmployeeCard = ({ handleEditUser, onDeleteUser, id, name, email, bio, skills, isOpenToWork }) => {
 	return (
-		<UserCard onClick={() => handleEditUser({ id, name: prompt('Enter userName:') })} $bg={isOpenToWork}>
-			<h3 style={{ gap: '10px', display: 'flex', alignItems: 'center' }}>
+		<UserCard $bg={isOpenToWork}>
+			<h3
+				onClick={() => handleEditUser({ id, name: prompt('Enter userName:') })}
+				style={{ gap: '10px', display: 'flex', alignItems: 'center' }}
+			>
 				{name}
 				{isOpenToWork ? <WorkIcon /> : <MdWorkOff className='workOff' />}
 			</h3>
-			<h4>
-				{email}{' '}
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width='24'
-					height='24'
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='#000000'
-					stroke-width='1.75'
-					stroke-linecap='round'
-					stroke-linejoin='round'
-					class='lucide lucide-mouse'
-				>
-					<rect x='5' y='2' width='14' height='20' rx='7' />
-					<path d='M12 6v4' />
-				</svg>
-			</h4>
+			<h4>{email} </h4>
 			<h5>{bio}</h5>
 			<SkillList>
 				{skills.map(skill => (

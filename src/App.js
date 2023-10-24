@@ -5,9 +5,9 @@ import { Counter } from './components/Counter/Counter'
 const App = () => {
 	return (
 		<div>
-			{/* <Employee /> */}
+			<Employee />
 			{/* <RegisterForm /> */}
-			<Counter />
+			{/* <Counter /> */}
 		</div>
 	)
 }

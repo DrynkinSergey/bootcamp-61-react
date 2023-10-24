@@ -16,6 +16,18 @@ export class Employee extends Component {
 		isAvailable: false,
 		activeSkill: 'all',
 	}
+	componentDidMount() {
+		console.log('Users already done!')
+		const users = JSON.parse(window.localStorage.getItem('users'))
+		if (users?.length) {
+			this.setState({ users })
+		}
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.users !== this.state.users) {
+			window.localStorage.setItem('users', JSON.stringify(this.state.users))
+		}
+	}
 
 	handleDeleteUser = id => {
 		console.log(id)
