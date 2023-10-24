@@ -7,6 +7,7 @@ export const ModalWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(10px);
 `
 
 export const ModalContent = styled.div`
