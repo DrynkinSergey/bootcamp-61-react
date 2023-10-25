@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { FcLike } from 'react-icons/fc'
 import { cutText } from '../../helpers/cutText'
-export const PostCard = ({ toggleModal, body, id, reactions, tags, title }) => {
-	const item = { toggleModal, body, id, reactions, tags, title }
+export const PostCard = ({ handleLikePost, toggleModal, body, id, reactions, tags, title }) => {
+	const item = { body, id, reactions, tags, title }
 	return (
 		<Card>
 			<div>
@@ -15,7 +15,7 @@ export const PostCard = ({ toggleModal, body, id, reactions, tags, title }) => {
 						<span>{reactions}</span>
 					</div>
 					<div>
-						<button>Like</button>
+						<button onClick={() => handleLikePost(item)}>Like</button>
 						<button onClick={() => toggleModal(item)}>Read more...</button>
 						<button>Delete</button>
 					</div>

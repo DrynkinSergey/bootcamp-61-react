@@ -2,7 +2,7 @@ import React from 'react'
 import { PostCard } from './PostCard'
 import styled from 'styled-components'
 
-export const PostList = ({ toggleModal, posts = [] }) => {
+export const PostList = ({ handleLikePost, toggleModal, posts = [] }) => {
 	// const getSmth = ({ fn }) => {
 	// 	fn()
 	// 	console.log('Your fn is done!')
@@ -17,7 +17,7 @@ export const PostList = ({ toggleModal, posts = [] }) => {
 	return (
 		<StyledList>
 			{posts.map(post => (
-				<PostCard toggleModal={toggleModal} key={post.id} {...post} />
+				<PostCard handleLikePost={handleLikePost} toggleModal={toggleModal} key={post.id} {...post} />
 			))}
 		</StyledList>
 	)
