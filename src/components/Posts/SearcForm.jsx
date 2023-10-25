@@ -6,6 +6,7 @@ export class SearcForm extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault()
+		this.props.setQuery(this.state.searchStr)
 		this.setState({ searchStr: '' })
 	}
 	render() {

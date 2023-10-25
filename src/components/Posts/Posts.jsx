@@ -1,44 +1,100 @@
 import React, { Component } from 'react'
-import { fetchPosts } from '../../services/api'
+import { fetchPosts, fetchPostsByQuery } from '../../services/api'
 import { toast } from 'react-toastify'
 import { PostList } from './PostList'
 import { Button } from './Button'
 import { SearcForm } from './SearcForm'
-const INITIAL_STATE_POSTS = { loading: false, error: null, posts: [], skip: 0, limit: 4 }
+import Modal from '../Modal/Modal'
+import { FidgetSpinner } from 'react-loader-spinner'
 export default class Posts extends Component {
-	state = { ...INITIAL_STATE_POSTS }
+	state = {
+		loading: false,
+		error: null,
+		posts: [],
+		skip: 0,
+		total: null,
+		limit: 4,
+		query: '',
+		isOpen: false,
+		content: null,
+	}
 	async componentDidMount() {
 		const { limit, skip } = this.state
-		this.getPosts({ skip, limit })
+		this.getPosts({ skip, limit, fn: fetchPosts })
 	}
 
 	async componentDidUpdate(prevProps, prevState) {
-		const { limit, skip } = this.state
-		if (prevState.skip !== skip) {
-			this.getPosts({ skip, limit })
+		const { limit, skip, query } = this.state
+
+		if (!query && prevState.skip !== skip) {
+			this.getPosts({ skip, limit, fn: fetchPosts })
+		}
+
+		if (query && (query !== prevState.query || skip !== prevState.skip)) {
+			this.getPosts({ skip, limit, q: query, fn: fetchPostsByQuery })
 		}
 	}
 	handleLoadMore = () => {
 		this.setState(prev => ({ skip: prev.skip + prev.limit }))
 	}
-	getPosts = async ({ skip, limit }) => {
+	getPosts = async ({ skip, limit, q, fn }) => {
+		this.setState({ loading: true })
 		try {
-			const { posts, total } = await fetchPosts({ limit: 4, skip })
-			this.setState(prev => ({ posts: [...prev.posts, ...posts] }))
+			const { posts, total } = await fn({ q, limit: 4, skip })
+			this.setState(prev => ({ posts: [...prev.posts, ...posts], total }))
 		} catch (error) {
 			this.setState({ error: error.message })
 			toast.error(error.message)
+		} finally {
+			this.setState({ loading: false })
 		}
 	}
+
+	handleSetQuery = query => {
+		this.setState({ query, posts: [], skip: 0 })
+	}
+	toggleModal = content => {
+		this.setState(prev => ({ isOpen: !prev.isOpen, content }))
+	}
 	render() {
-		const { posts } = this.state
+		const { posts, query, isOpen, content, total, loading } = this.state
 		return (
 			<div>
 				<h1>Posts</h1>
-				<SearcForm />
+
+				<SearcForm setQuery={this.handleSetQuery} />
+				{query && <h2>Our query request: {query}</h2>}
+				{total && <h2>Total posts: {total}</h2>}
+
 				<h2>{this.state.error}</h2>
-				<PostList posts={posts} />
-				<Button onClick={this.handleLoadMore}>Load more</Button>
+				{loading && !posts.length ? (
+					<FidgetSpinner
+						visible={true}
+						height='80'
+						width='80'
+						ariaLabel='dna-loading'
+						wrapperStyle={{}}
+						wrapperClass='dna-wrapper'
+						ballColors={['#ff0000', '#00ff00', '#0000ff']}
+						backgroundColor='#F4442E'
+					/>
+				) : (
+					<PostList toggleModal={this.toggleModal} posts={posts} />
+				)}
+				{total > posts.length ? (
+					<Button onClick={this.handleLoadMore}>{loading ? 'Loading...' : 'Load more'}</Button>
+				) : null}
+				{isOpen ? (
+					<Modal close={this.toggleModal}>
+						<h1>{content.title}</h1>
+						<h2>{content.body}</h2>
+						<ul>
+							{content.tags.map(tag => (
+								<li key={tag}>{tag}</li>
+							))}
+						</ul>
+					</Modal>
+				) : null}
 			</div>
 		)
 	}

@@ -2,11 +2,22 @@ import React from 'react'
 import { PostCard } from './PostCard'
 import styled from 'styled-components'
 
-export const PostList = ({ posts = [] }) => {
+export const PostList = ({ toggleModal, posts = [] }) => {
+	// const getSmth = ({ fn }) => {
+	// 	fn()
+	// 	console.log('Your fn is done!')
+	// }
+	// const getSum = () => {
+	// 	console.log(1 + 2)
+	// }
+
+	// getSmth({ fn: getSum })
+	// getSmth({ fn: () => console.log('Hello') })
+
 	return (
 		<StyledList>
 			{posts.map(post => (
-				<PostCard key={post.id} {...post} />
+				<PostCard toggleModal={toggleModal} key={post.id} {...post} />
 			))}
 		</StyledList>
 	)
