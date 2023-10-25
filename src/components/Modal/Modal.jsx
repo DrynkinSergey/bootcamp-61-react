@@ -39,7 +39,7 @@ class Modal extends Component {
 		document.removeEventListener('keydown', this.handleKeyDown)
 	}
 
-	handleClickOutside = ({ target, currentTarget }) => {
+	handleClickOutside = ({ next, target, currentTarget }) => {
 		if (target === currentTarget) {
 			this.props.close()
 			console.log('Нарешті ми клацнули на бекдроп')
@@ -59,6 +59,8 @@ class Modal extends Component {
 					{/* <h1>{this.state.timer}</h1> */}
 
 					{this.props.children}
+
+					<button onClick={this.props.next}>Next</button>
 				</ModalContent>
 			</ModalWrapper>
 		)

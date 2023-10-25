@@ -86,6 +86,9 @@ export default class Posts extends Component {
 			posts: prev.posts.map(el => (el.id === post.id ? { ...el, reactions: el.reactions + 1 } : el)),
 		}))
 	}
+	handleNext = id => {
+		this.setState({ content: this.state.posts.find(item => item.id === id) })
+	}
 	render() {
 		const { posts, query, isOpen, content, total, loading } = this.state
 		return (
@@ -122,7 +125,18 @@ export default class Posts extends Component {
 
 				{/* Перевірка на відкриту модалку */}
 				{isOpen ? (
-					<Modal close={this.toggleModal}>
+					<Modal
+						next={() => {
+							const item = this.state.posts.findIndex(item => item.id === content.id)
+							console.log(item)
+							if (item !== this.state.posts.length) {
+								this.handleNext(this.state.posts[item + 1]?.id)
+							} else {
+								this.handleNext(this.state.posts.length)
+							}
+						}}
+						close={this.toggleModal}
+					>
 						<h1>{content.title}</h1>
 						<h2>{content.body}</h2>
 						<ul>
