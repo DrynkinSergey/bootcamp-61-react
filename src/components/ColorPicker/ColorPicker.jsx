@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyledBackgroundTheme, StyledColorPalette, StyledColor, StyledColorsList } from './ColorPicker.styled'
-import { Test } from './Test'
 
 export class ColorPicker extends React.PureComponent {
 	state = {
@@ -17,9 +16,6 @@ export class ColorPicker extends React.PureComponent {
 	}
 	render() {
 		const { colors, currentColor } = this.state
-		const title = 'test'
-		const arr = Array(200).fill(' ')
-		console.log('rerender')
 		return (
 			<div>
 				<StyledBackgroundTheme $bg={currentColor}>
@@ -38,10 +34,6 @@ export class ColorPicker extends React.PureComponent {
 						</StyledColorsList>
 					</StyledColorPalette>
 				</StyledBackgroundTheme>
-
-				{arr.map((item, index) => (
-					<Test key={index} title={title} />
-				))}
 			</div>
 		)
 	}
