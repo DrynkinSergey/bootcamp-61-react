@@ -7,9 +7,6 @@ import AddUserForm from './AddUserForm'
 import { nanoid } from 'nanoid'
 import Modal from '../Modal/Modal'
 
-// Create state
-// Add delete func
-
 export class Employee extends Component {
 	state = {
 		users: userData,
@@ -24,9 +21,6 @@ export class Employee extends Component {
 		if (users?.length) {
 			this.setState({ users })
 		}
-		// setTimeout(() => {
-		// 	this.handleToggleModal()
-		// }, 4000)
 	}
 	componentDidUpdate(_, prevState) {
 		if (prevState.users !== this.state.users) {
@@ -40,8 +34,6 @@ export class Employee extends Component {
 	handleToggleModal = () => {
 		this.setState(prev => ({ isOpen: !prev.isOpen }))
 	}
-	//true => !true === false
-	//false => !false === true
 
 	handleDeleteUser = id => {
 		console.log(id)
@@ -49,10 +41,7 @@ export class Employee extends Component {
 	}
 
 	handleChangeFilter = filter => {
-		// async operation
 		this.setState({ filter })
-		// sync operation
-		// window.localStorage.setItem('filter', JSON.stringify(this.state.filter))
 	}
 
 	handleChangeIsAvailable = () => {

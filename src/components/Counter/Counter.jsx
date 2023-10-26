@@ -14,10 +14,7 @@ export class Counter extends React.Component {
 
 	componentDidUpdate(_, prevState) {
 		console.log('Update')
-		// console.log(prevProps)
-		// console.log(prevState)
 		if (prevState.counter !== this.state.counter) {
-			// toast.info('Comonent was updated')
 		}
 		if (prevState.step !== this.state.step) {
 			toast.info('Step was updated')

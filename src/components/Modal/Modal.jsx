@@ -6,9 +6,6 @@ import styled from 'styled-components'
 class Modal extends Component {
 	intervaleId = null
 	timeoutId = null
-	// state = {
-	// 	timer: 1,
-	// }
 
 	handleKeyDown = e => {
 		console.log(e)
@@ -22,10 +19,6 @@ class Modal extends Component {
 		console.log('Модалка відкрилась')
 		document.addEventListener('keydown', this.handleKeyDown)
 		document.body.style.overflow = 'hidden'
-		// this.intervaleId = setInterval(() => {
-		// 	console.log('update')
-		// 	this.setState(prev => ({ timer: prev.timer + 1 }))
-		// }, 1000)
 		this.timeoutId = setTimeout(() => {
 			console.log('Boom')
 		}, 2000)
@@ -56,7 +49,6 @@ class Modal extends Component {
 						<hr />
 					</>
 					<CloseButton onClick={this.props.close}>×</CloseButton>
-					{/* <h1>{this.state.timer}</h1> */}
 
 					{this.props.children}
 

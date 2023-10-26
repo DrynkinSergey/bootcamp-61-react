@@ -6,29 +6,13 @@ export class ColorPicker extends React.PureComponent {
 	state = {
 		colors: this.props.colors,
 		currentColor: 'white',
-		// user: {
-		// 	info: {
-		// 		city: {
-		// 			street: {
-		// 				latitude: {
-		// 					w: 123,
-		// 				},
-		// 			},
-		// 		},
-		// 	},
-		// },
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Колір було змінено')
 	}
-	// shouldComponentUpdate(nextProps, nextState) {
-	// 	return nextState.currentColor !== this.state.currentColor
-	// }
 
-	// Приймаємо колір через параметр
 	handleChangeColor = color => {
-		// Встановлюємо поточний колір в стейт
 		this.setState({ currentColor: color })
 	}
 	render() {
