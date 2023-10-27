@@ -9,10 +9,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Counter />
-				<ColorPicker colors={colors} />
-				<Posts />
-				<Employee />
+				{/* <Counter /> */}
+				{/* <ColorPicker colors={colors} /> */}
+				{/* <Posts /> */}
+				{/* <Employee /> */}
 				<TodoList />
 			</div>
 		)
