@@ -4,17 +4,8 @@ import { StyledBackgroundTheme, StyledColorPalette, StyledColor, StyledColorsLis
 export const ColorPicker = props => {
 	const [colors, setColors] = useState(props.colors)
 	const [currentColor, setCurrentColor] = useState('white')
-	// state = {
-	// 	colors: this.props.colors,
-	// 	currentColor: 'white',
-	// }
-
-	// componentDidUpdate(prevProps, prevState) {
-	// 	console.log('Колір було змінено')
-	// }
 
 	const handleChangeColor = selectedColor => {
-		// this.setState({ currentColor: color })
 		setCurrentColor(selectedColor)
 	}
 

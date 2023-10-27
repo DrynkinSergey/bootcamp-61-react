@@ -4,8 +4,6 @@ import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
 const Modal = ({ children, close, next }) => {
-	// intervaleId = null
-	// timeoutId = null
 	const intervalId = useRef(null)
 	const modalCloseRef = useRef(null)
 	useEffect(() => {
@@ -19,13 +17,11 @@ const Modal = ({ children, close, next }) => {
 		setTimeout(() => {
 			modalCloseRef.current.click()
 		}, 3000)
-		console.log('Модалка відкрилась')
 		document.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
 		intervalId.current = setInterval(() => {
 			console.log(new Date().toLocaleTimeString())
 		}, 1000)
-		// Використання аналога willUnmount
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 			document.body.style.overflow = 'visible'
@@ -37,23 +33,6 @@ const Modal = ({ children, close, next }) => {
 	useEffect(() => {
 		console.log('Другий еффект')
 	}, [])
-
-	// componentDidMount() {
-	// 	console.log('Модалка відкрилась')
-	// 	document.addEventListener('keydown', this.handleKeyDown)
-	// 	document.body.style.overflow = 'hidden'
-	// 	this.timeoutId = setTimeout(() => {
-	// 		console.log('Boom')
-	// 	}, 2000)
-	// }
-
-	// componentWillUnmount() {
-	// 	console.log('Модалка закривається')
-	// 	clearInterval(this.intervaleId)
-	// 	clearTimeout(this.timeoutId)
-	// 	document.body.style.overflow = 'visible'
-	// 	document.removeEventListener('keydown', this.handleKeyDown)
-	// }
 
 	const handleClickOutside = ({ next, target, currentTarget }) => {
 		if (target === currentTarget) {

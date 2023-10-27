@@ -8,14 +8,6 @@ import { nanoid } from 'nanoid'
 import Modal from '../Modal/Modal'
 
 export const Employee = () => {
-	// state = {
-	// 	users: userData,
-	// 	filter: '',
-	// 	isAvailable: false,
-	// 	activeSkill: 'all',
-	// 	isOpen: false,
-	// }
-
 	const [users, setUsers] = useState(userData)
 	const [filter, setFilter] = useState('')
 	const [isAvailable, setIsAvailable] = useState(false)
@@ -35,55 +27,32 @@ export const Employee = () => {
 		window.localStorage.setItem('filter', JSON.stringify(filter))
 	}, [users, filter])
 
-	// componentDidMount() {
-	// 	console.log('Users already done!')
-	// 	const users = JSON.parse(window.localStorage.getItem('users'))
-	// 	if (users?.length) {
-	// 		setState({ users })
-	// 	}
-	// }
-	// componentDidUpdate(_, prevState) {
-	// 	if (prevState.users !== state.users) {
-	// 		window.localStorage.setItem('users', JSON.stringify(state.users))
-	// 	}
-	// 	if (prevState.filter !== state.filter) {
-	// 		window.localStorage.setItem('filter', JSON.stringify(state.filter))
-	// 	}
-	// }
-
 	const handleToggleModal = () => {
-		// setState(prev => ({ isOpen: !prev.isOpen }))
 		setIsOpen(prev => !prev)
 	}
 
 	const handleDeleteUser = id => {
 		console.log(id)
 		setUsers(prev => prev.filter(user => user.id !== id))
-		// setState(prev => ({ users: prev.users.filter(user => user.id !== id) }))
 	}
 
 	const handleChangeFilter = filter => {
-		// setState({ filter })
 		setFilter(filter)
 	}
 
 	const handleChangeIsAvailable = () => {
 		setIsAvailable(prev => !prev)
-		// setState(prev => ({ isAvailable: !prev.isAvailable }))
 	}
 	const handleChangeActiveSkill = activeSkill => {
 		console.log(activeSkill)
 		setActiveSkill(activeSkill)
-		// setState({ activeSkill })
 	}
 	const handleAddUser = user => {
 		setUsers(prev => [...prev, { ...user, id: nanoid() }])
-		// setState(prev => ({ users: [...prev.users, { ...user, id: nanoid() }] }))
 	}
 
 	const handleEditUser = ({ name, id }) => {
 		setUsers(prev => prev.map(user => (user.id === id ? { ...user, name } : user)))
-		// setState(prev => ({ users: prev.users.map(user => (user.id === id ? { ...user, name } : user)) }))
 	}
 
 	const filteredData = getFilteredData({ users, filter, isAvailable, activeSkill })
