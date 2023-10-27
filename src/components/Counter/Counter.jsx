@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Flex, FlexContainer, StyledButton, StyledCounter } from './Counter.styled'
 import { toast } from 'react-toastify'
 
@@ -6,26 +6,42 @@ export const Counter = () => {
 	// Повертає два значення. 1 - сама змінна, значення. 2 - Функція для керування цією змінною
 	const [counter, setCounter] = useState(0)
 	const [step, setStep] = useState(1)
-
+	const firstRender = useRef(true)
+	const inputRef = useRef(null)
+	const buttonRef = useRef(null)
+	// const [test, setTest] = useState(1)
 	useEffect(() => {
-		console.log('Лічильник змонтувався, лише 1 раз йде виконання')
+		console.log(inputRef.current)
+		inputRef.current.focus()
+		setTimeout(() => {
+			buttonRef.current.click()
+		}, 2000)
+		firstRender.current || console.log('Лічильник змонтувався, лише 1 раз йде виконання')
 	}, [])
 
 	useEffect(() => {
-		console.log('Крок було змінено')
+		firstRender.current || console.log('Крок було змінено')
 	}, [step])
 
 	useEffect(() => {
+		if (firstRender.current === true) {
+			toast.error('Це був перший рендер! Далі він не повториться!')
+			firstRender.current = false
+			return
+		}
 		console.log('Було змінено  лічильник')
-	}, [counter])
+	}, [counter, step])
+
 	useEffect(() => {
 		if (counter > 10) {
+			inputRef.current.style.border = '2px solid red'
 			console.log('Counter > 10')
 		}
 		if (step === 5) {
 			setStep(1)
 		}
 	}, [counter, step])
+	console.log('Render')
 
 	const handleIncrement = () => {
 		// this.setState(prevState => ({ counter: prevState.counter + prevState.step }))
@@ -52,12 +68,16 @@ export const Counter = () => {
 	return (
 		<FlexContainer>
 			<StyledCounter>
-				<input value={step} onChange={handleChangeStep} type='number' placeholder='change step' />
+				{/* <button onClick={() => setTest(prev => prev + 1)}>UPDATE</button> */}
+
+				<input ref={inputRef} value={step} onChange={handleChangeStep} type='number' placeholder='change step' />
 				<h1>{counter}</h1>
 				<Flex>
 					<StyledButton onClick={handleDecrement}>minus</StyledButton>
 					<StyledButton onClick={handleReset}>reset</StyledButton>
-					<StyledButton onClick={handleIncrement}>plus</StyledButton>
+					<StyledButton onClick={handleIncrement} ref={buttonRef}>
+						plus
+					</StyledButton>
 				</Flex>
 			</StyledCounter>
 		</FlexContainer>

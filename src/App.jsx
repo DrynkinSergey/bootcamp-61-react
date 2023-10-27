@@ -11,8 +11,8 @@ class App extends React.Component {
 			<div>
 				{/* <Counter /> */}
 				{/* <ColorPicker colors={colors} /> */}
-				{/* <Posts /> */}
-				<Employee />
+				<Posts />
+				{/* <Employee /> */}
 				{/* <TodoList /> */}
 			</div>
 		)

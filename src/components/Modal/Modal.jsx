@@ -1,4 +1,4 @@
-import { Component, useEffect } from 'react'
+import { Component, useEffect, useRef } from 'react'
 import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
@@ -6,7 +6,8 @@ import styled from 'styled-components'
 const Modal = ({ children, close, next }) => {
 	// intervaleId = null
 	// timeoutId = null
-
+	const intervalId = useRef(null)
+	const modalCloseRef = useRef(null)
 	useEffect(() => {
 		const handleKeyDown = e => {
 			console.log(e)
@@ -15,13 +16,20 @@ const Modal = ({ children, close, next }) => {
 				toast.info('Modal closed by Escape')
 			}
 		}
+		setTimeout(() => {
+			modalCloseRef.current.click()
+		}, 3000)
 		console.log('Модалка відкрилась')
 		document.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
+		intervalId.current = setInterval(() => {
+			console.log(new Date().toLocaleTimeString())
+		}, 1000)
 		// Використання аналога willUnmount
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 			document.body.style.overflow = 'visible'
+			clearInterval(intervalId.current)
 			console.log('Мене закрили')
 		}
 	}, [close])
@@ -57,7 +65,7 @@ const Modal = ({ children, close, next }) => {
 	}
 
 	return (
-		<ModalWrapper onClick={handleClickOutside}>
+		<ModalWrapper ref={modalCloseRef} onClick={handleClickOutside}>
 			<ModalContent>
 				<>
 					<h1>Modal</h1>
