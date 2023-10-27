@@ -4,18 +4,37 @@ import { StyledButton } from '../Counter/Counter.styled'
 import { StyledInput, StyledTodo, StyledTodoList } from './TodoList.styled'
 import todoData from './../../assets/todos.json'
 import { Flex } from '../../styles/Global'
-import { Component, useState } from 'react'
+import { Component, useEffect, useState } from 'react'
 import { Filter } from './Filter'
+import { toast } from 'react-toastify'
 
 export const TodoList = () => {
-	const [todos, setTodos] = useState(todoData)
+	const [todos, setTodos] = useState([])
 	const [newTodoText, setNewTodoText] = useState('')
 	const [filterStr, setFilterStr] = useState('')
+
+	useEffect(() => {
+		const todos = JSON.parse(window.localStorage.getItem('todos'))
+		if (todos?.length) {
+			setTodos(todos)
+		}
+	}, [])
+
+	useEffect(() => {
+		window.localStorage.setItem('todos', JSON.stringify(todos))
+	}, [todos])
+	// useEffect(() => {
+	// 	if (todos.length === 5) {
+	// 		console.log('We have 5 todos')
+	// 	}
+	// 	if (filterStr === 'react') {
+	// 		toast.success('You write word : REACT')
+	// 	}
+	// }, [todos, filterStr])
 
 	const handleDeleteTodo = id => {
 		console.log(id)
 		setTodos(prev => prev.filter(item => item.id !== id))
-
 		// this.setState(prev => ({ todos: prev.todos.filter(item => item.id !== id) }))
 	}
 	const handleChangeInput = e => {
@@ -109,9 +128,9 @@ export const TodoList = () => {
 // 	}
 // 	componentDidMount() {
 // 		console.log('Mount')
-// 		const todos = JSON.parse(window.localStorage.getItem('todos'))
-// 		if (todos.length) {
-// 			this.setState({ todos })
+// const todos = JSON.parse(window.localStorage.getItem('todos'))
+// if (todos.length) {
+// 	this.setState({ todos })
 // 		}
 // 	}
 // 	componentDidUpdate(_, prevState) {

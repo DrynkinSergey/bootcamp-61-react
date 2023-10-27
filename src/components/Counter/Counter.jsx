@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Flex, FlexContainer, StyledButton, StyledCounter } from './Counter.styled'
 import { toast } from 'react-toastify'
 
@@ -6,6 +6,26 @@ export const Counter = () => {
 	// Повертає два значення. 1 - сама змінна, значення. 2 - Функція для керування цією змінною
 	const [counter, setCounter] = useState(0)
 	const [step, setStep] = useState(1)
+
+	useEffect(() => {
+		console.log('Лічильник змонтувався, лише 1 раз йде виконання')
+	}, [])
+
+	useEffect(() => {
+		console.log('Крок було змінено')
+	}, [step])
+
+	useEffect(() => {
+		console.log('Було змінено  лічильник')
+	}, [counter])
+	useEffect(() => {
+		if (counter > 10) {
+			console.log('Counter > 10')
+		}
+		if (step === 5) {
+			setStep(1)
+		}
+	}, [counter, step])
 
 	const handleIncrement = () => {
 		// this.setState(prevState => ({ counter: prevState.counter + prevState.step }))
