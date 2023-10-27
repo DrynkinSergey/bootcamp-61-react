@@ -1,17 +1,11 @@
-.button{
-  padding: 10px 14px;
-  background: white;
-  border: 1px solid;
-  color: red;
-  font-weight: bold;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.title {
+  @apply font-bold mx-0 text-2xl text-violet-600
 }
-.title{
-  color:green;
-}
-p{
-  padding: 0;
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
+.list {
+  @apply px-10 py-10 grid justify-center mx-auto max-w-7xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6
 }
