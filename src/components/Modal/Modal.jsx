@@ -1,62 +1,76 @@
-import { Component } from 'react'
+import { Component, useEffect } from 'react'
 import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
-class Modal extends Component {
-	intervaleId = null
-	timeoutId = null
+const Modal = ({ children, close, next }) => {
+	// intervaleId = null
+	// timeoutId = null
 
-	handleKeyDown = e => {
-		console.log(e)
-		if (e.key === 'Escape') {
-			this.props.close()
-			toast.info('Modal closed by Escape')
+	useEffect(() => {
+		const handleKeyDown = e => {
+			console.log(e)
+			if (e.key === 'Escape') {
+				close()
+				toast.info('Modal closed by Escape')
+			}
 		}
-	}
-
-	componentDidMount() {
 		console.log('Модалка відкрилась')
-		document.addEventListener('keydown', this.handleKeyDown)
+		document.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
-		this.timeoutId = setTimeout(() => {
-			console.log('Boom')
-		}, 2000)
-	}
+		// Використання аналога willUnmount
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown)
+			document.body.style.overflow = 'visible'
+			console.log('Мене закрили')
+		}
+	}, [close])
 
-	componentWillUnmount() {
-		console.log('Модалка закривається')
-		clearInterval(this.intervaleId)
-		clearTimeout(this.timeoutId)
-		document.body.style.overflow = 'visible'
-		document.removeEventListener('keydown', this.handleKeyDown)
-	}
+	useEffect(() => {
+		console.log('Другий еффект')
+	}, [])
 
-	handleClickOutside = ({ next, target, currentTarget }) => {
+	// componentDidMount() {
+	// 	console.log('Модалка відкрилась')
+	// 	document.addEventListener('keydown', this.handleKeyDown)
+	// 	document.body.style.overflow = 'hidden'
+	// 	this.timeoutId = setTimeout(() => {
+	// 		console.log('Boom')
+	// 	}, 2000)
+	// }
+
+	// componentWillUnmount() {
+	// 	console.log('Модалка закривається')
+	// 	clearInterval(this.intervaleId)
+	// 	clearTimeout(this.timeoutId)
+	// 	document.body.style.overflow = 'visible'
+	// 	document.removeEventListener('keydown', this.handleKeyDown)
+	// }
+
+	const handleClickOutside = ({ next, target, currentTarget }) => {
 		if (target === currentTarget) {
-			this.props.close()
+			close()
 			console.log('Нарешті ми клацнули на бекдроп')
 		} else {
 			console.log('Клік відбувся не на бекдропі')
 		}
 	}
-	render() {
-		return (
-			<ModalWrapper onClick={this.handleClickOutside}>
-				<ModalContent>
-					<>
-						<h1>Modal</h1>
-						<hr />
-					</>
-					<CloseButton onClick={this.props.close}>×</CloseButton>
 
-					{this.props.children}
+	return (
+		<ModalWrapper onClick={handleClickOutside}>
+			<ModalContent>
+				<>
+					<h1>Modal</h1>
+					<hr />
+				</>
+				<CloseButton onClick={close}>×</CloseButton>
 
-					<button onClick={this.props.next}>Next</button>
-				</ModalContent>
-			</ModalWrapper>
-		)
-	}
+				{children}
+
+				<button onClick={next}>Next</button>
+			</ModalContent>
+		</ModalWrapper>
+	)
 }
 export const ScrollContent = styled.div`
 	overflow-y: scroll;

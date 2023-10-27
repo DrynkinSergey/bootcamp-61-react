@@ -1,86 +1,110 @@
 import { EmployeesFilter } from './EmployeesFilter'
 import { EmployeeList } from './EmployeeList'
 import userData from './../../assets/users.json'
-import { Component } from 'react'
+import { Component, useEffect, useState } from 'react'
 import { getFilteredData } from '../../helpers/getFilteredData'
 import AddUserForm from './AddUserForm'
 import { nanoid } from 'nanoid'
 import Modal from '../Modal/Modal'
 
-export class Employee extends Component {
-	state = {
-		users: userData,
-		filter: '',
-		isAvailable: false,
-		activeSkill: 'all',
-		isOpen: false,
-	}
-	componentDidMount() {
+export const Employee = () => {
+	// state = {
+	// 	users: userData,
+	// 	filter: '',
+	// 	isAvailable: false,
+	// 	activeSkill: 'all',
+	// 	isOpen: false,
+	// }
+
+	const [users, setUsers] = useState(userData)
+	const [filter, setFilter] = useState('')
+	const [isAvailable, setIsAvailable] = useState(false)
+	const [activeSkill, setActiveSkill] = useState('all')
+	const [isOpen, setIsOpen] = useState(false)
+
+	useEffect(() => {
 		console.log('Users already done!')
 		const users = JSON.parse(window.localStorage.getItem('users'))
 		if (users?.length) {
-			this.setState({ users })
+			setUsers(users)
 		}
-	}
-	componentDidUpdate(_, prevState) {
-		if (prevState.users !== this.state.users) {
-			window.localStorage.setItem('users', JSON.stringify(this.state.users))
-		}
-		if (prevState.filter !== this.state.filter) {
-			window.localStorage.setItem('filter', JSON.stringify(this.state.filter))
-		}
+	}, [])
+
+	useEffect(() => {
+		window.localStorage.setItem('users', JSON.stringify(users))
+		window.localStorage.setItem('filter', JSON.stringify(filter))
+	}, [users, filter])
+
+	// componentDidMount() {
+	// 	console.log('Users already done!')
+	// 	const users = JSON.parse(window.localStorage.getItem('users'))
+	// 	if (users?.length) {
+	// 		setState({ users })
+	// 	}
+	// }
+	// componentDidUpdate(_, prevState) {
+	// 	if (prevState.users !== state.users) {
+	// 		window.localStorage.setItem('users', JSON.stringify(state.users))
+	// 	}
+	// 	if (prevState.filter !== state.filter) {
+	// 		window.localStorage.setItem('filter', JSON.stringify(state.filter))
+	// 	}
+	// }
+
+	const handleToggleModal = () => {
+		// setState(prev => ({ isOpen: !prev.isOpen }))
+		setIsOpen(prev => !prev)
 	}
 
-	handleToggleModal = () => {
-		this.setState(prev => ({ isOpen: !prev.isOpen }))
-	}
-
-	handleDeleteUser = id => {
+	const handleDeleteUser = id => {
 		console.log(id)
-		this.setState(prev => ({ users: prev.users.filter(user => user.id !== id) }))
+		setUsers(prev => prev.filter(user => user.id !== id))
+		// setState(prev => ({ users: prev.users.filter(user => user.id !== id) }))
 	}
 
-	handleChangeFilter = filter => {
-		this.setState({ filter })
+	const handleChangeFilter = filter => {
+		// setState({ filter })
+		setFilter(filter)
 	}
 
-	handleChangeIsAvailable = () => {
-		this.setState(prev => ({ isAvailable: !prev.isAvailable }))
+	const handleChangeIsAvailable = () => {
+		setIsAvailable(prev => !prev)
+		// setState(prev => ({ isAvailable: !prev.isAvailable }))
 	}
-	handleChangeActiveSkill = activeSkill => {
+	const handleChangeActiveSkill = activeSkill => {
 		console.log(activeSkill)
-		this.setState({ activeSkill })
+		setActiveSkill(activeSkill)
+		// setState({ activeSkill })
 	}
-	handleAddUser = user => {
-		this.setState(prev => ({ users: [...prev.users, { ...user, id: nanoid() }] }))
-	}
-
-	handleEditUser = ({ name, id }) => {
-		this.setState(prev => ({ users: prev.users.map(user => (user.id === id ? { ...user, name } : user)) }))
+	const handleAddUser = user => {
+		setUsers(prev => [...prev, { ...user, id: nanoid() }])
+		// setState(prev => ({ users: [...prev.users, { ...user, id: nanoid() }] }))
 	}
 
-	render() {
-		const { filter, users, isAvailable, activeSkill, isOpen } = this.state
-		const filteredData = getFilteredData({ users, filter, isAvailable, activeSkill })
-		return (
-			<>
-				<EmployeesFilter
-					isAvailable={isAvailable}
-					filter={filter}
-					activeSkill={activeSkill}
-					onChangeSkill={this.handleChangeActiveSkill}
-					onChangeAvailable={this.handleChangeIsAvailable}
-					onChangeFilter={this.handleChangeFilter}
-				/>
-				<AddUserForm handleAddUser={this.handleAddUser} />
-				<button onClick={this.handleToggleModal}>Show Modal</button>
-				{isOpen ? (
-					<Modal close={this.handleToggleModal}>
-						<h1>Продам холодильник</h1>
-					</Modal>
-				) : null}
-				<EmployeeList handleEditUser={this.handleEditUser} onDeleteUser={this.handleDeleteUser} users={filteredData} />
-			</>
-		)
+	const handleEditUser = ({ name, id }) => {
+		setUsers(prev => prev.map(user => (user.id === id ? { ...user, name } : user)))
+		// setState(prev => ({ users: prev.users.map(user => (user.id === id ? { ...user, name } : user)) }))
 	}
+
+	const filteredData = getFilteredData({ users, filter, isAvailable, activeSkill })
+	return (
+		<>
+			<EmployeesFilter
+				isAvailable={isAvailable}
+				filter={filter}
+				activeSkill={activeSkill}
+				onChangeSkill={handleChangeActiveSkill}
+				onChangeAvailable={handleChangeIsAvailable}
+				onChangeFilter={handleChangeFilter}
+			/>
+			<AddUserForm handleAddUser={handleAddUser} />
+			<button onClick={handleToggleModal}>Show Modal</button>
+			{isOpen ? (
+				<Modal close={handleToggleModal}>
+					<h1>Продам холодильник</h1>
+				</Modal>
+			) : null}
+			<EmployeeList handleEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={filteredData} />
+		</>
+	)
 }

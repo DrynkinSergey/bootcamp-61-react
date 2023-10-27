@@ -1,5 +1,5 @@
 import React from 'react'
-import Posts from './components/Posts/Posts'
+import { Posts } from './components/Posts/Posts'
 import { ColorPicker } from './components/ColorPicker/ColorPicker'
 import colors from './assets/colors.json'
 import { Counter } from './components/Counter/Counter'
@@ -9,10 +9,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Counter />
+				{/* <Counter /> */}
 				{/* <ColorPicker colors={colors} /> */}
 				{/* <Posts /> */}
-				{/* <Employee /> */}
+				<Employee />
 				{/* <TodoList /> */}
 			</div>
 		)
