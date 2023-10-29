@@ -17,12 +17,7 @@ export const Posts = () => {
 	const [query, setQuery] = useState('')
 	const [isOpen, setIsOpen] = useState(false)
 	const [content, setContent] = useState(null)
-	const [count, setCount] = useState(null)
 
-	useEffect(() => {
-		console.log('UPDATE')
-		setCount(prev => prev + 1)
-	}, [])
 	useEffect(() => {
 		if (query) {
 			getPosts({ skip, limit, q: query, fn: fetchPostsByQuery })
