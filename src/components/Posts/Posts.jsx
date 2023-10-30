@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component, useEffect, useReducer, useState } from 'react'
 import { fetchPosts, fetchPostsByQuery } from '../../services/api'
 import { toast } from 'react-toastify'
 import { PostList } from './PostList'
@@ -6,17 +6,15 @@ import { Button } from './Button'
 import { SearcForm } from './SearcForm'
 import Modal from '../Modal/Modal'
 import { FidgetSpinner } from 'react-loader-spinner'
+import { initialState, postReducer } from '../../store/reducer'
 
 export const Posts = () => {
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(null)
-	const [posts, setPosts] = useState([])
-	const [skip, setSkip] = useState(0)
-	const [total, setTotal] = useState(null)
-	const [limit, setLimit] = useState(4)
-	const [query, setQuery] = useState('')
-	const [isOpen, setIsOpen] = useState(false)
-	const [content, setContent] = useState(null)
+	//* Використовуємо вже підготовані редьюсер та початковий стан
+	// В результаті отримуємо дві сущності - state, dispatch - функція для відправки action
+	// Події, що треба зробити. Зі своїм type
+
+	const [state, dispatch] = useReducer(postReducer, initialState)
+	const { loading, error, posts, skip, limit, total, query, isOpen, content } = state
 
 	useEffect(() => {
 		if (query) {
@@ -27,36 +25,39 @@ export const Posts = () => {
 	}, [limit, skip, query])
 
 	const handleLoadMore = () => {
-		setSkip(prev => prev + limit)
+		dispatch({ type: 'loadMore' })
 	}
 	const getPosts = async ({ skip, limit, q, fn }) => {
 		try {
-			setLoading(true)
+			// Вказуємо, що трапилась загрузка
+			dispatch({ type: 'loading', payload: true })
 			const { posts, total } = await fn({ q, limit: 4, skip })
-			setPosts(prev => [...prev, ...posts])
-			setTotal(total)
+			// Після закінчення запиту робимо діспатч наших даних.
+			// Відправляємо в payload - результат виконання запиту
+			dispatch({ type: 'setPosts', payload: posts })
+			dispatch({ type: 'setTotal', payload: total })
 		} catch (error) {
-			setError(error.message)
+			dispatch({ type: 'error', payload: error.message })
 			toast.error(error.message)
 		} finally {
-			setLoading(false)
+			// Вказуємо, що  загрузка закінчилась
+
+			dispatch({ type: 'loading', payload: false })
 		}
 	}
 
 	const handleSetQuery = query => {
-		setQuery(query)
-		setPosts([])
-		setSkip(0)
+		dispatch({ type: 'setQuery', payload: query })
 	}
 	const toggleModal = content => {
-		setIsOpen(prev => !prev)
-		setContent(content)
+		// setIsOpen(prev => !prev)
+		// setContent(content)
 	}
 	const handleLikePost = post => {
-		setPosts(prev => prev.map(el => (el.id === post.id ? { ...el, reactions: el.reactions + 1 } : el)))
+		// setPosts(prev => prev.map(el => (el.id === post.id ? { ...el, reactions: el.reactions + 1 } : el)))
 	}
 	const handleNext = id => {
-		setContent(posts.find(item => item.id === id))
+		// setContent(posts.find(item => item.id === id))
 	}
 
 	return (

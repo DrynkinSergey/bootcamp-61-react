@@ -5,6 +5,7 @@ export const MyContext = createContext()
 export const ContextProvider = ({ children }) => {
 	const [todos, setTodos] = useState([])
 	const [user, setUser] = useState('')
+
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	useEffect(() => {
 		axios.get('https://dummyjson.com/todos').then(res => setTodos(res.data.todos))

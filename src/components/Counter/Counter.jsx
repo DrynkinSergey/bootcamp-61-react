@@ -65,6 +65,7 @@ export const Counter = () => {
 		// setCounter(0)
 		// setStep(1)
 	}
+
 	const handleChangeStep = e => {
 		dispatch({ type: 'changeStep', payload: +e.target.value })
 		// setStep(+e.target.value)
