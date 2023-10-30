@@ -1,10 +1,48 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { Flex, FlexContainer, StyledButton, StyledCounter } from './Counter.styled'
 import { ChildComponent } from './ChildComponent'
 
 export const Counter = () => {
-	const [counter, setCounter] = useState(0)
-	const [step, setStep] = useState(1)
+	const inititalState = {
+		counter: 0,
+		step: 1,
+		test: 1,
+	}
+
+	const counterReducer = (state, action) => {
+		console.log(action)
+
+		// {type, payload}
+		switch (action.type) {
+			case 'plus': {
+				return {
+					...state,
+					counter: state.counter + 1,
+				}
+			}
+			case 'decrement':
+				return {
+					...state,
+					counter: state.counter - 1,
+				}
+			case 'reset':
+				return {
+					...state,
+					counter: 0,
+					step: 1,
+				}
+			case 'changeStep':
+				return {
+					...state,
+					step: action.payload,
+				}
+
+			default:
+				return state
+		}
+	}
+	const [state, dispatch] = useReducer(counterReducer, inititalState)
+	const { counter, step } = state
 	const [testValue, setTestValue] = useState(1)
 	const calcSmt = value => {
 		console.log('Calc start')
@@ -15,20 +53,21 @@ export const Counter = () => {
 
 	const result = useMemo(() => calcSmt(testValue), [testValue])
 	// const result = calcSmt(testValue)
-	const handleIncrement = () => {
-		setCounter(prevState => prevState + step)
-	}
+
 	const handleDecrement = () => {
 		if (counter !== 0) {
-			setCounter(prevState => prevState - step)
+			// setCounter(prevState => prevState - step)
+			dispatch({ type: 'decrement' })
 		}
 	}
 	const handleReset = () => {
-		setCounter(0)
-		setStep(1)
+		dispatch({ type: 'reset' })
+		// setCounter(0)
+		// setStep(1)
 	}
 	const handleChangeStep = e => {
-		setStep(+e.target.value)
+		dispatch({ type: 'changeStep', payload: +e.target.value })
+		// setStep(+e.target.value)
 	}
 	const testClick = useCallback(e => {
 		return 2
@@ -44,7 +83,7 @@ export const Counter = () => {
 					<Flex>
 						<StyledButton onClick={handleDecrement}>minus</StyledButton>
 						<StyledButton onClick={handleReset}>reset</StyledButton>
-						<StyledButton onClick={handleIncrement}>plus</StyledButton>
+						<StyledButton onClick={() => dispatch({ type: 'plus' })}>plus</StyledButton>
 					</Flex>
 				</StyledCounter>
 			</FlexContainer>

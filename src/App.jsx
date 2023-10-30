@@ -16,9 +16,9 @@ const App = () => {
 	return (
 		<div>
 			<button onClick={logout}>Exit</button>
-			<Counter />
+			{/* <Counter /> */}
 			{/* <ColorPicker colors={colors} /> */}
-			{/* <Posts /> */}
+			<Posts />
 			{/* <Employee auto={this.props.auto} /> */}
 			{/* <TodoList /> */}
 		</div>
