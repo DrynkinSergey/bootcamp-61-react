@@ -7,7 +7,7 @@ import AddUserForm from './AddUserForm'
 import { nanoid } from 'nanoid'
 import Modal from '../Modal/Modal'
 
-export const Employee = () => {
+export const Employee = ({ auto }) => {
 	const [users, setUsers] = useState(userData)
 	const [filter, setFilter] = useState('')
 	const [isAvailable, setIsAvailable] = useState(false)
@@ -59,6 +59,7 @@ export const Employee = () => {
 	return (
 		<>
 			<EmployeesFilter
+				auto={auto}
 				isAvailable={isAvailable}
 				filter={filter}
 				activeSkill={activeSkill}

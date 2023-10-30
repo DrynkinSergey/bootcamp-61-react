@@ -9,11 +9,11 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Counter />
+				{/* <Counter /> */}
 				{/* <ColorPicker colors={colors} /> */}
-				<Posts />
-				{/* <Employee /> */}
-				{/* <TodoList /> */}
+				{/* <Posts /> */}
+				{/* <Employee auto={this.props.auto} /> */}
+				<TodoList />
 			</div>
 		)
 	}

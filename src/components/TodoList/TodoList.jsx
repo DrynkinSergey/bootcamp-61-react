@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import { StyledButton } from '../Counter/Counter.styled'
 import { StyledInput, StyledTodo, StyledTodoList } from './TodoList.styled'
 import { Flex } from '../../styles/Global'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Filter } from './Filter'
+import { MyContext } from '../../context/ContextProvider'
 
 export const TodoList = () => {
 	const [todos, setTodos] = useState([])
 	const [newTodoText, setNewTodoText] = useState('')
 	const [filterStr, setFilterStr] = useState('')
-
+	const { user, login } = useContext(MyContext)
+	console.log(user)
 	useEffect(() => {
 		const todos = JSON.parse(window.localStorage.getItem('todos'))
 		if (todos?.length) {
@@ -65,6 +67,8 @@ export const TodoList = () => {
 
 	return (
 		<div>
+			<h2>Hello {user}</h2>
+			<button onClick={() => login('Oleh')}>Login</button>
 			<StyledTodoList>
 				<Flex $height='auto'>
 					<StyledInput value={newTodoText} onChange={handleChangeInput} type='text' />

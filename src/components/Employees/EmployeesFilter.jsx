@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { StyledInput } from '../RegisterForm/RegisterForm.styled'
 import { Flex } from '../Counter/Counter.styled'
+// import { MyContext } from '../..'
 
 const skilsList = ['all', 'react', 'angular', 'vue']
 
 export const EmployeesFilter = ({
+	auto,
 	filter,
 	activeSkill,
 	isAvailable,
@@ -13,9 +15,12 @@ export const EmployeesFilter = ({
 	onChangeAvailable,
 	onChangeSkill,
 }) => {
+	// const { autoLux } = useContext(MyContext)
 	return (
 		<Filters>
 			<h1>Filters</h1>
+			<h2>{auto}</h2>
+			{/* <h2>{autoLux}</h2> */}
 			<Flex $height='100px' $items='center'>
 				<StyledInput type='text' onChange={e => onChangeFilter(e.target.value)} value={filter} />
 				<label htmlFor=''>
