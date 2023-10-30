@@ -9,7 +9,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				{/* <Counter /> */}
+				<Counter />
 				{/* <ColorPicker colors={colors} /> */}
 				<Posts />
 				{/* <Employee /> */}

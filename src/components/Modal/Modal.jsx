@@ -1,4 +1,4 @@
-import { Component, useEffect, useRef } from 'react'
+import { Component, useCallback, useEffect, useRef } from 'react'
 import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
@@ -6,14 +6,20 @@ import styled from 'styled-components'
 const Modal = ({ children, close, next }) => {
 	const intervalId = useRef(null)
 	const modalCloseRef = useRef(null)
-	useEffect(() => {
-		const handleKeyDown = e => {
+	const handleKeyDown = useCallback(
+		e => {
 			console.log(e)
 			if (e.key === 'Escape') {
 				close()
 				toast.info('Modal closed by Escape')
 			}
-		}
+		},
+		[close]
+	)
+	// 1xr0d -> 00xdr -> 01xr0
+
+	// 1xr0d -> 1xr0d -> 1xr0d
+	useEffect(() => {
 		setTimeout(() => {
 			modalCloseRef.current.click()
 		}, 3000)
@@ -28,7 +34,7 @@ const Modal = ({ children, close, next }) => {
 			clearInterval(intervalId.current)
 			console.log('Мене закрили')
 		}
-	}, [close])
+	}, [close, handleKeyDown])
 
 	useEffect(() => {
 		console.log('Другий еффект')
