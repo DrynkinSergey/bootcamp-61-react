@@ -3,9 +3,9 @@ import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
-const Modal = ({ children, close, next }) => {
+const Modal = ({ children, close }) => {
 	const intervalId = useRef(null)
-	const modalCloseRef = useRef(null)
+	// const modalCloseRef = useRef(null)
 	const handleKeyDown = useCallback(
 		e => {
 			console.log(e)
@@ -20,9 +20,6 @@ const Modal = ({ children, close, next }) => {
 
 	// 1xr0d -> 1xr0d -> 1xr0d
 	useEffect(() => {
-		setTimeout(() => {
-			modalCloseRef.current.click()
-		}, 3000)
 		document.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
 		intervalId.current = setInterval(() => {
@@ -50,7 +47,7 @@ const Modal = ({ children, close, next }) => {
 	}
 
 	return (
-		<ModalWrapper ref={modalCloseRef} onClick={handleClickOutside}>
+		<ModalWrapper onClick={handleClickOutside}>
 			<ModalContent>
 				<>
 					<h1>Modal</h1>
@@ -60,7 +57,7 @@ const Modal = ({ children, close, next }) => {
 
 				{children}
 
-				<button onClick={next}>Next</button>
+				{/* <button onClick={next}>Next</button> */}
 			</ModalContent>
 		</ModalWrapper>
 	)

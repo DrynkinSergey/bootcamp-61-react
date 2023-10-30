@@ -6,12 +6,24 @@ import { Flex } from '../../styles/Global'
 import { useContext, useEffect, useState } from 'react'
 import { Filter } from './Filter'
 import { MyContext } from '../../context/ContextProvider'
+import Modal from '../Modal/Modal'
+import { useModal } from '../../hooks/useModal'
 
 export const TodoList = () => {
-	const [todos, setTodos] = useState([])
 	const [newTodoText, setNewTodoText] = useState('')
 	const [filterStr, setFilterStr] = useState('')
-	const { user, login } = useContext(MyContext)
+
+	// const [isOpen, setIsOpen] = useState(false)
+
+	// const openModal = () => {
+	// 	setIsOpen(true)
+	// }
+	// const closeModal = () => {
+	// 	setIsOpen(false)
+	// }
+	const { isOpen, openModal, closeModal } = useModal()
+
+	const { user, login, todos, setTodos } = useContext(MyContext)
 	console.log(user)
 	useEffect(() => {
 		const todos = JSON.parse(window.localStorage.getItem('todos'))
@@ -20,9 +32,9 @@ export const TodoList = () => {
 		}
 	}, [])
 
-	useEffect(() => {
-		window.localStorage.setItem('todos', JSON.stringify(todos))
-	}, [todos])
+	// useEffect(() => {
+	// 	window.localStorage.setItem('todos', JSON.stringify(todos))
+	// }, [todos])
 
 	const handleDeleteTodo = id => {
 		console.log(id)
@@ -78,7 +90,7 @@ export const TodoList = () => {
 				{filteredData?.map(item => (
 					<StyledTodo key={item.id}>
 						<input type='checkbox' checked={item.completed} onChange={() => handleToggleTodo(item.id)} />
-						<span>{item.todo}</span>
+						<span onClick={openModal}>{item.todo}</span>
 						<StyledButton $size='18px' onClick={() => handleDeleteTodo(item.id)}>
 							Delete
 						</StyledButton>
@@ -87,6 +99,12 @@ export const TodoList = () => {
 				<button onClick={handleReset}>Clear</button>
 				<button onClick={handleDeleteSelected}>Delete only selected</button>
 			</StyledTodoList>
+
+			{isOpen ? (
+				<Modal close={closeModal}>
+					<h2>Hello</h2>
+				</Modal>
+			) : null}
 		</div>
 	)
 }
