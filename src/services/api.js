@@ -20,3 +20,12 @@ export const fetchPostsByQuery = async params => {
 	})
 	return data
 }
+
+export const fetchUsers = async params => {
+	const { data } = await axios.get('/users', { params: { ...params } })
+	return data.users
+}
+export const fetchUserById = async id => {
+	const { data } = await axios.get(`/users/${id}`)
+	return data
+}

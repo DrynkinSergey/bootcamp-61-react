@@ -1,8 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const NavBar = () => {
-	return <SideBar></SideBar>
+	return (
+		<SideBar>
+			<StyledLink to='/'>Home</StyledLink>
+			<StyledLink to='/about'>About</StyledLink>
+			<StyledLink to='/users'>Users</StyledLink>
+			<StyledLink to='/colorPicker'>Color Picker</StyledLink>
+		</SideBar>
+	)
 }
 
 const SideBar = styled.nav`
