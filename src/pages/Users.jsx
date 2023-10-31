@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { fetchUsers } from '../services/api'
 import { Link } from 'react-router-dom'
+import { useHttp } from '../hooks/useHttp'
 
 const Users = () => {
-	const [users, setUsers] = useState([])
-	useEffect(() => {
-		fetchUsers().then(data => setUsers(data))
-	}, [])
+	const [users, setUsers] = useHttp(fetchUsers)
+
 	return (
 		<div>
 			<ul>
-				{users.map(user => (
+				{users?.map(user => (
 					<li key={user.id}>
 						{/* <Link to={`${user.id}`}> */}
 						<Link to={user.id.toString()}>
