@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { fetchUserById } from '../services/api'
 import { useHttp } from '../hooks/useHttp'
+import { StyledLink } from '../components/Navbar'
 
 const DetailsUser = () => {
 	const { userId } = useParams()
@@ -19,6 +20,14 @@ const DetailsUser = () => {
 			<p>Surname: {user.lastName}</p>
 			<p>Age: {user.age}</p>
 			<p>Email: {user.email}</p>
+
+			<div>
+				<StyledLink to='about'> About </StyledLink>
+				<StyledLink to='posts'> Posts </StyledLink>
+			</div>
+			<div>
+				<Outlet />
+			</div>
 		</div>
 	)
 }
