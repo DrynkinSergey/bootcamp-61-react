@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound'
 import DetailsUser from './pages/DetailsUser'
 import { ColorPicker } from './components/ColorPicker/ColorPicker'
 import AboutUser from './components/AboutUser'
+import UserPosts from './components/UserPosts'
 const App = () => {
 	return (
 		<>
@@ -26,7 +27,7 @@ const App = () => {
 					<Route path='users/:userId' element={<DetailsUser />}>
 						<Route index element={<h2> Клікни на посилання, щоб побачити їх дані</h2>} />
 						<Route path='about' element={<AboutUser />} />
-						<Route path='posts' element={<h2>Posts</h2>} />
+						<Route path='posts' element={<UserPosts />} />
 					</Route>
 				</Route>
 				<Route path='*' element={<NotFound />} />
