@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { NavBar } from './Navbar'
+import { toast } from 'react-toastify'
 
 export const Layout = () => {
 	return (
 		<LayoutWrapper>
 			<NavBar />
 			<WrapperOutlet>
-				<Outlet />
+				<Suspense fallback={<h1>loading....</h1>}>
+					<Outlet />
+				</Suspense>
 			</WrapperOutlet>
 		</LayoutWrapper>
 	)

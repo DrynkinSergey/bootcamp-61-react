@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 import { fetchUserById } from '../services/api'
 import { useHttp } from '../hooks/useHttp'
@@ -7,7 +7,7 @@ import { StyledLink } from '../components/Navbar'
 const DetailsUser = () => {
 	const { userId } = useParams()
 	const location = useLocation()
-	console.log(location)
+	// console.log(location)
 	const goBackRef = useRef(location.state?.from || '/')
 	const [user, setUser] = useHttp(fetchUserById, userId)
 
@@ -28,7 +28,9 @@ const DetailsUser = () => {
 				<StyledLink to='posts'> Posts </StyledLink>
 			</div>
 			<div>
-				<Outlet />
+				<Suspense fallback={<h1>Load second outlet</h1>}>
+					<Outlet />
+				</Suspense>
 			</div>
 		</div>
 	)

@@ -3,10 +3,12 @@ import { StyledInput, StyledLabel, StyledLoginForm, StyledTitle } from './Regist
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
 import { UserContext } from '../../context/UserProvider'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 export const RegisterForm = () => {
 	const { login, isLoggedIn } = useContext(UserContext)
+	const location = useLocation()
+	console.log(location)
 	const {
 		register,
 		handleSubmit,
@@ -20,7 +22,7 @@ export const RegisterForm = () => {
 		reset()
 	}
 	if (isLoggedIn) {
-		return <Navigate to='/' />
+		return <Navigate to={location.state?.from || '/'} />
 	}
 	return (
 		<Flex>

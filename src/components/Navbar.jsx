@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserProvider'
 
 export const NavBar = () => {
 	const { logout } = useContext(UserContext)
+
 	return (
 		<SideBar>
 			<StyledLink to='/'>Home</StyledLink>
