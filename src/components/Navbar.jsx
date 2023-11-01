@@ -1,13 +1,18 @@
+import { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { UserContext } from '../context/UserProvider'
 
 export const NavBar = () => {
+	const { logout } = useContext(UserContext)
 	return (
 		<SideBar>
 			<StyledLink to='/'>Home</StyledLink>
 			<StyledLink to='/about'>About</StyledLink>
 			<StyledLink to='/users'>Users</StyledLink>
 			<StyledLink to='/colorPicker'>Color Picker</StyledLink>
+			<StyledLink to='/register'>Sign up</StyledLink>
+			<button onClick={logout}>Exit</button>
 		</SideBar>
 	)
 }

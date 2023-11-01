@@ -9,32 +9,38 @@ import DetailsUser from './pages/DetailsUser'
 import { ColorPicker } from './components/ColorPicker/ColorPicker'
 import AboutUser from './components/AboutUser'
 import UserPosts from './components/UserPosts'
+import Register from './pages/Register'
+import { useContext } from 'react'
+import { UserContext } from './context/UserProvider'
 const App = () => {
+	const { isLoggedIn } = useContext(UserContext)
 	return (
 		<>
-			<Routes>
-				<Route path='/' element={<Layout />}>
-					<Route index element={<Home />} />
-					<Route path='about' element={<About />} />
-					<Route path='users' element={<Users />} />
+			{isLoggedIn ? (
+				<Routes>
+					<Route path='/' element={<Layout />}>
+						<Route index element={<Home />} />
+						<Route path='about' element={<About />} />
+						<Route path='register' element={<Register />} />
+						<Route path='users' element={<Users />} />
 
-					<Route path='colorPicker' element={<ColorPicker colors={colors} />} />
-					{/* Динамічний параметр */}
+						<Route path='colorPicker' element={<ColorPicker colors={colors} />} />
+						{/* Динамічний параметр */}
 
-					{/* users/12/about */}
-					{/* users/12/info */}
-					{/* users/12/posts */}
-					<Route path='users/:userId' element={<DetailsUser />}>
-						<Route index element={<h2> Клікни на посилання, щоб побачити їх дані</h2>} />
-						<Route path='about' element={<AboutUser />} />
-						<Route path='posts' element={<UserPosts />} />
+						<Route path='users/:userId' element={isLoggedIn ? <DetailsUser /> : <Navigate to='/register' />}>
+							<Route index element={<h2> Клікни на посилання, щоб побачити їх дані</h2>} />
+							<Route path='about' element={<AboutUser />} />
+							<Route path='posts' element={<UserPosts />} />
+						</Route>
 					</Route>
-				</Route>
-				<Route path='*' element={<NotFound />} />
-
-				{/* Redirect */}
-				{/* <Route path='*' element={<Navigate to='/' />} /> */}
-			</Routes>
+					<Route path='*' element={<NotFound />} />
+				</Routes>
+			) : (
+				<Routes>
+					<Route path='register' element={<Register />} />
+					<Route path='*' element={<Navigate to='/register' />} />
+				</Routes>
+			)}
 		</>
 	)
 }

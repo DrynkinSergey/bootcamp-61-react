@@ -16,15 +16,21 @@ export const StyledLoginForm = styled.form`
 `
 export const StyledLabel = styled.label`
 	display: flex;
-	flex-direction: column;
+	flex-direction: ${props => (props.$row ? 'row' : 'column')};
 	font-weight: bold;
 	color: white;
 `
 export const StyledInput = styled.input`
 	padding: 5px 10px;
 	font-size: calc((1vh + 1vw) * 1.2);
+	/* background-color: ${props => (props.$errors?.name ? 'red' : 'inherit')}; */
 	background-color: inherit;
 	border: none;
+	/* border: ${props => (props.$errors?.name ? '2px solid red' : 'none')}; */
+
 	outline: none;
 	border-bottom: 1px solid;
+	&:invalid {
+		background-color: red;
+	}
 `

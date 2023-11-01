@@ -12,6 +12,8 @@ const Users = () => {
 				{users?.map(user => (
 					<li key={user.id}>
 						{/* <Link to={`${user.id}`}> */}
+						{/* /users/12 */}
+						{/* /users/121 */}
 						<Link state={{ from: location }} to={user.id.toString()}>
 							{user.lastName} {user.firstName}
 						</Link>
