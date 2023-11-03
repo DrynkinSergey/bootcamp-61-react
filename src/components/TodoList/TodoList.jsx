@@ -5,7 +5,9 @@ import { useForm } from 'react-hook-form'
 import { selectTodos } from '../../redux/todoList/selectors'
 
 export const TodoList = () => {
+	// Використовуємо useSelector, щоб отримати дані з стору
 	const todos = useSelector(selectTodos)
+	// Діспатч для того, щоб відправити дані до редьюсера (змінити стор)
 	const dispatch = useDispatch()
 
 	const { register, handleSubmit } = useForm()
@@ -15,6 +17,7 @@ export const TodoList = () => {
 	}
 
 	const handleChangeTodo = id => {
+		// Виклик діспатча з actionCreator , всередину функції пишема майбутній payload
 		dispatch(editTodo({ id, text: 'REDUX IS MY LOVE' }))
 	}
 	return (
