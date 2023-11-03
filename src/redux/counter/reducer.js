@@ -1,4 +1,4 @@
-import { MINUS, PLUS, RESET } from './constants'
+import { CHANGE_INPUT, MINUS, PLUS, RESET } from './constants'
 
 const initialState = {
 	step: 1,
@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export const counterReducer = (state = initialState, action) => {
-	console.log(action)
 	switch (action.type) {
 		case PLUS: {
 			return { ...state, counter: state.counter + state.step }
@@ -16,6 +15,12 @@ export const counterReducer = (state = initialState, action) => {
 		}
 		case RESET: {
 			return { ...initialState }
+		}
+		case CHANGE_INPUT: {
+			return {
+				...state,
+				step: action.payload,
+			}
 		}
 		default:
 			return state
