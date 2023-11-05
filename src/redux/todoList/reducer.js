@@ -1,6 +1,5 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_TODO } from './constants'
 
-// Cторюємо наш початковий стан
 const initialState = {
 	todos: [
 		{ id: '1', todo: 'Learn REDUX', completed: false },
@@ -9,9 +8,7 @@ const initialState = {
 	],
 }
 
-// Створюємо функцію редьюсер для зміни стейту. Передаємо обов'язково initialState
 export const todoReducer = (state = initialState, action) => {
-	// Пробігаємось по тайпу, перевіряємо що прийшло
 	switch (action.type) {
 		case DELETE_TODO: {
 			return {
@@ -37,7 +34,6 @@ export const todoReducer = (state = initialState, action) => {
 				todos: state.todos.map(item => (item.id === action.payload.id ? { ...item, todo: action.payload.text } : item)),
 			}
 		}
-		// По замовченню повертаємо стейт незмінним, якщо жоден з action.type не відпрацював
 		default:
 			return state
 	}
