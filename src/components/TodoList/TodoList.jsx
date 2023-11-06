@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, deleteTodo, editTodo, toggleTodo } from '../../redux/todoList/actions'
 import { useForm } from 'react-hook-form'
 import { selectTodos } from '../../redux/todoList/selectors'
+import { toast } from 'react-toastify'
+import moment from 'moment'
 
 export const TodoList = () => {
 	// Використовуємо useSelector, щоб отримати дані з стору
+	useEffect(() => {
+		setTimeout(() => {
+			toast.info(`${moment().format('DD.MM.YYYY hh:mm:ss')}`)
+		}, 3000)
+	}, [])
 	const todos = useSelector(selectTodos)
 	// Діспатч для того, щоб відправити дані до редьюсера (змінити стор)
 	const dispatch = useDispatch()
