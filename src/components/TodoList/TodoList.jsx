@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, deleteTodo, editTodo, toggleTodo } from '../../redux/todoList/actions'
+
 import { useForm } from 'react-hook-form'
 import { selectTodos } from '../../redux/todoList/selectors'
 import { toast } from 'react-toastify'
 import moment from 'moment'
+import { addTodo, deleteTodo, editTodo, toggleTodo } from '../../redux/todoList/todoSlice'
 
 export const TodoList = () => {
 	// Використовуємо useSelector, щоб отримати дані з стору
