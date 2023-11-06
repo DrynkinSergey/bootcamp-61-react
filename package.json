@@ -12,6 +12,7 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.288.0",
     "modern-normalize": "^2.0.0",
+    "moment": "^2.29.4",
     "nanoid": "^5.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
