@@ -1,13 +1,10 @@
-import { combineReducers, createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { counterReducer } from './counter/reducer'
-import { devToolsEnhancer } from '@redux-devtools/extension'
 import { todoReducer } from './todoList/reducer'
 
-const rootReducer = combineReducers({
-	count: counterReducer,
-	todoList: todoReducer,
+export const store = configureStore({
+	reducer: {
+		count: counterReducer,
+		todoList: todoReducer,
+	},
 })
-
-const enhancer = devToolsEnhancer()
-
-export const store = createStore(rootReducer, enhancer)
