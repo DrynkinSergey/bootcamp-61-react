@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf, nanoid } from '@reduxjs/toolkit'
 import moment from 'moment'
-import { addTodoThunk, deleteTodoThunk, fetchDataThunk, toggleTodoThunk } from './operations'
+import { addTodoThunk, deleteTodoThunk, editTitleThunk, fetchDataThunk, toggleTodoThunk } from './operations'
 
 const prepareAdd = todo => {
 	return {
@@ -17,18 +17,19 @@ const initialState = {
 	todos: [],
 	loading: false,
 	error: null,
+	deletedId: null,
 }
 const todoSlice = createSlice({
 	name: 'todos',
 	initialState,
 	reducers: {
-		editTodo: (state, { payload }) => {
-			const item = state.todos.find(item => item.id === payload.id)
-			item.todo = payload.text
+		setCurrentId: (state, { payload }) => {
+			state.deletedId = payload
 		},
 	},
 	extraReducers: builder => {
 		builder
+
 			.addCase(fetchDataThunk.fulfilled, (state, { payload }) => {
 				state.todos = payload
 				state.loading = false
@@ -45,6 +46,10 @@ const todoSlice = createSlice({
 			.addCase(addTodoThunk.fulfilled, (state, { payload }) => {
 				state.loading = false
 				state.todos.push(payload)
+			})
+			.addCase(editTitleThunk.fulfilled, (state, { payload }) => {
+				const itemIndex = state.todos.findIndex(item => item.id === payload.id)
+				state.todos[itemIndex] = payload
 			})
 
 			.addMatcher(
@@ -64,5 +69,5 @@ const todoSlice = createSlice({
 	},
 })
 
-export const { editTodo } = todoSlice.actions
+export const { setCurrentId } = todoSlice.actions
 export const todoReducer = todoSlice.reducer
