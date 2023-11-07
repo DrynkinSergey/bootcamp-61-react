@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form'
-import { selectTodos } from '../../redux/todoList/selectors'
+import { selectError, selectLoading, selectTodos } from '../../redux/todoList/selectors'
 import { toast } from 'react-toastify'
 import moment from 'moment'
 import { addTodo, deleteTodo, editTodo, toggleTodo } from '../../redux/todoList/todoSlice'
 import { Filter } from '../filter/Filter'
+import { deleteTodoThunk, fetchDataThunk, toggleTodoThunk } from '../../redux/todoList/operations'
 
 export const TodoList = () => {
-	// Використовуємо useSelector, щоб отримати дані з стору
-
 	const todos = useSelector(selectTodos)
 	const filter = useSelector(state => state.filter.filter)
-	// Діспатч для того, щоб відправити дані до редьюсера (змінити стор)
+	const loading = useSelector(selectLoading)
+	const error = useSelector(selectError)
 	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(fetchDataThunk('hello it is my first thunk'))
+	}, [dispatch])
 
 	const { register, handleSubmit } = useForm()
 
@@ -23,7 +26,6 @@ export const TodoList = () => {
 	}
 
 	const handleChangeTodo = id => {
-		// Виклик діспатча з actionCreator , всередину функції пишема майбутній payload
 		dispatch(editTodo({ id, text: 'REDUX IS MY LOVE' }))
 	}
 	const getFilteredData = () => {
@@ -47,12 +49,13 @@ export const TodoList = () => {
 				<button>Add todo</button>
 			</form>
 			<Filter />
+			{loading && <h1>loading....</h1>}
 			<ul>
 				{getFilteredData()?.map(todo => (
 					<li key={todo.id}>
-						<input type='checkbox' checked={todo.completed} onChange={() => dispatch(toggleTodo(todo.id))} />
+						<input type='checkbox' checked={todo.completed} onChange={() => dispatch(toggleTodoThunk(todo))} />
 						<p onClick={() => handleChangeTodo(todo.id)}>{todo.todo}</p>{' '}
-						<button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
+						<button onClick={() => dispatch(deleteTodoThunk(todo.id))}>Delete</button>
 					</li>
 				))}
 			</ul>

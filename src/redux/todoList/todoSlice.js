@@ -13,11 +13,9 @@ const prepareAdd = todo => {
 }
 
 const initialState = {
-	todos: [
-		{ id: '1', todo: 'Learn REDUX', completed: false },
-		{ id: '2', todo: 'Learn REDUX1', completed: false },
-		{ id: '3', todo: 'Learn REDUX2', completed: false },
-	],
+	todos: [],
+	loading: false,
+	error: null,
 }
 const todoSlice = createSlice({
 	name: 'todos',
@@ -40,8 +38,19 @@ const todoSlice = createSlice({
 			const item = state.todos.find(item => item.id === payload.id)
 			item.todo = payload.text
 		},
+		isLoading: (state, action) => {
+			state.loading = true
+		},
+		isError: (state, action) => {
+			state.error = action.payload
+			state.loading = false
+		},
+		isFetchingDone: (state, action) => {
+			state.loading = false
+			state.todos = action.payload
+		},
 	},
 })
 
-export const { deleteTodo, addTodo, editTodo, toggleTodo } = todoSlice.actions
+export const { isError, isLoading, isFetchingDone, deleteTodo, addTodo, editTodo, toggleTodo } = todoSlice.actions
 export const todoReducer = todoSlice.reducer
