@@ -7,14 +7,16 @@ import { toast } from 'react-toastify'
 import moment from 'moment'
 import { addTodo, deleteTodo, editTodo, toggleTodo } from '../../redux/todoList/todoSlice'
 import { Filter } from '../filter/Filter'
-import { deleteTodoThunk, fetchDataThunk, toggleTodoThunk } from '../../redux/todoList/operations'
+import { addTodoThunk, deleteTodoThunk, fetchDataThunk, toggleTodoThunk } from '../../redux/todoList/operations'
 
 export const TodoList = () => {
 	const todos = useSelector(selectTodos)
 	const filter = useSelector(state => state.filter.filter)
 	const loading = useSelector(selectLoading)
 	const error = useSelector(selectError)
+
 	const dispatch = useDispatch()
+
 	useEffect(() => {
 		dispatch(fetchDataThunk('hello it is my first thunk'))
 	}, [dispatch])
@@ -22,7 +24,7 @@ export const TodoList = () => {
 	const { register, handleSubmit } = useForm()
 
 	const submit = ({ text }) => {
-		dispatch(addTodo(text))
+		dispatch(addTodoThunk(text))
 	}
 
 	const handleChangeTodo = id => {
@@ -50,6 +52,7 @@ export const TodoList = () => {
 			</form>
 			<Filter />
 			{loading && <h1>loading....</h1>}
+			{error && <h1>{error}</h1>}
 			<ul>
 				{getFilteredData()?.map(todo => (
 					<li key={todo.id}>
