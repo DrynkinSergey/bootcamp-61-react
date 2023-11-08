@@ -4,6 +4,7 @@ export const Tailwind = () => {
 	const active = false
 	return (
 		<div className='px-4 py-20'>
+			<span className='loading loading-dots loading-lg'></span>
 			<h1 className='text-3xl  text-[#cd1818] font-bold text-center border-black border-2 py-4 my-4'>Tailwind</h1>
 			<div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 font-bold text-2xl'>
 				<p

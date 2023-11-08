@@ -5,9 +5,9 @@ import { Tailwind } from './components/Tailwind/Tailwind'
 
 const App = () => {
 	return (
-		<div>
-			<Tailwind />
-			{/* <TodoList /> */}
+		<div className='bg-white'>
+			{/* <Tailwind /> */}
+			<TodoList />
 		</div>
 	)
 }
