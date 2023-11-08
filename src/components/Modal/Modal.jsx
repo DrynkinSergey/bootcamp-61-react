@@ -1,7 +1,10 @@
+import ReactDOM from 'react-dom'
 import { Component, useCallback, useEffect, useRef } from 'react'
 import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
+
+const rootModal = document.querySelector('#modal')
 
 const Modal = ({ children, close }) => {
 	const intervalId = useRef(null)
@@ -16,9 +19,7 @@ const Modal = ({ children, close }) => {
 		},
 		[close]
 	)
-	// 1xr0d -> 00xdr -> 01xr0
 
-	// 1xr0d -> 1xr0d -> 1xr0d
 	useEffect(() => {
 		document.addEventListener('keydown', handleKeyDown)
 		document.body.style.overflow = 'hidden'
@@ -46,7 +47,7 @@ const Modal = ({ children, close }) => {
 		}
 	}
 
-	return (
+	return ReactDOM.createPortal(
 		<ModalWrapper onClick={handleClickOutside}>
 			<ModalContent>
 				<>
@@ -59,7 +60,8 @@ const Modal = ({ children, close }) => {
 
 				{/* <button onClick={next}>Next</button> */}
 			</ModalContent>
-		</ModalWrapper>
+		</ModalWrapper>,
+		rootModal
 	)
 }
 export const ScrollContent = styled.div`

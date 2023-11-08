@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setFilter } from '../../redux/filter/filterSlice'
 
-export const Filter = () => {
+const Filter = () => {
 	const dispatch = useDispatch()
 	return (
 		<div>
@@ -12,3 +12,4 @@ export const Filter = () => {
 		</div>
 	)
 }
+export default Filter

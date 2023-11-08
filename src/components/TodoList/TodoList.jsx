@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form'
 import { selectError, selectFilteredData, selectUncompleted } from '../../redux/todoList/selectors'
-import { Filter } from '../filter/Filter'
 import { addTodoThunk, fetchDataThunk } from '../../redux/todoList/operations'
-import { TodoCard } from '../TodoCard/TodoCard'
-
+// import { Filter } from '../filter/Filter'
+// import { TodoCard } from '../TodoCard/TodoCard'
+import { TodoCard } from '../../components'
+import Filter from '../../components'
+import Modal from '../Modal/Modal'
+import { useModal } from '../../hooks/useModal'
 export const TodoList = () => {
 	const todos = useSelector(selectFilteredData)
-
+	const { isOpen, openModal, closeModal } = useModal()
 	const uncompletedTodos = useSelector(selectUncompleted)
 	const error = useSelector(selectError)
 
@@ -32,7 +35,12 @@ export const TodoList = () => {
 				<button>Add todo</button>
 			</form>
 			<Filter />
-
+			<button onClick={openModal}>Open</button>
+			{isOpen ? (
+				<Modal close={closeModal}>
+					<h2>Hello</h2>
+				</Modal>
+			) : null}
 			<h3>Uncompleted todos: {uncompletedTodos}</h3>
 			{error && <h1>{error}</h1>}
 			<ul>
