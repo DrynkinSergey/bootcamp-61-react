@@ -5,7 +5,7 @@ import { Tailwind } from './components/Tailwind/Tailwind'
 
 const App = () => {
 	return (
-		<div className='bg-white'>
+		<div className='bg-white min-h-screen text-black'>
 			{/* <Tailwind /> */}
 			<TodoList />
 		</div>

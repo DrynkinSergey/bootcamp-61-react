@@ -2,15 +2,24 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { setFilter } from '../../redux/filter/filterSlice'
+import { Button } from 'flowbite-react'
 
 const Filter = () => {
 	const dispatch = useDispatch()
 	return (
-		<div>
-			<button onClick={() => dispatch(setFilter('all'))}>All</button>
-			<button onClick={() => dispatch(setFilter('active'))}>Active</button>
-			<button onClick={() => dispatch(setFilter('completed'))}>Completed</button>
-		</div>
+		<Button.Group>
+			<div className='flex justify-center w-full'>
+				<Button onClick={() => dispatch(setFilter('all'))} color='gray'>
+					All
+				</Button>
+				<Button onClick={() => dispatch(setFilter('active'))} color='gray'>
+					Active
+				</Button>
+				<Button onClick={() => dispatch(setFilter('completed'))} color='gray'>
+					Completed
+				</Button>
+			</div>
+		</Button.Group>
 	)
 }
 export default Filter
