@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom'
 import { Component, useCallback, useEffect, useRef } from 'react'
-import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
+
+import { CloseButton, ModalContent, ModalWrapper } from './Modal.styled'
 
 const rootModal = document.querySelector('#modal')
 

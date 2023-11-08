@@ -1,9 +1,11 @@
 import styled from 'styled-components'
-import { StyledInput, StyledLabel, StyledLoginForm, StyledTitle } from './RegisterForm.styled'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react'
-import { UserContext } from '../../context/UserProvider'
 import { Navigate, useLocation } from 'react-router-dom'
+
+import { UserContext } from '../../context/UserProvider'
+
+import { StyledInput, StyledLabel, StyledLoginForm, StyledTitle } from './RegisterForm.styled'
 
 export const RegisterForm = () => {
 	const { login, isLoggedIn } = useContext(UserContext)

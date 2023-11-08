@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+
 import { setFilter } from '../../redux/filter/filterSlice'
 
 const Filter = () => {

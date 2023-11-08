@@ -1,7 +1,7 @@
-import React from 'react'
+import { useParams } from 'react-router-dom'
+
 import { useHttp } from '../hooks/useHttp'
 import { fetchPostsById } from '../services/api'
-import { useParams } from 'react-router-dom'
 
 const UserPosts = () => {
 	const { userId } = useParams()
