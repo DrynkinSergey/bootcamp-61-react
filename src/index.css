@@ -1,21 +1,10 @@
-.button{
-  padding: 10px 14px;
-  background: white;
-  border: 1px solid;
-  color: red;
-  font-weight: bold;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bigText {
+  font-size: 40px;
 }
-.title{
-  color:green;
-}
-p{
-  padding: 0;
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
-}
-body{
-  padding: 0;
-  margin: 0;
-}
+ .button  {@apply border-2 border-red-500 px-10 py-1 hover:bg-red-500 hover:text-white transition duration-300 rounded-xl shadow-xl max-w-[200px]
+  }

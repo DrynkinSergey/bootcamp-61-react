@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { Component, useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
@@ -56,9 +56,7 @@ const Modal = ({ children, close }) => {
 					<hr />
 				</>
 				<CloseButton onClick={close}>×</CloseButton>
-
 				{children}
-
 				{/* <button onClick={next}>Next</button> */}
 			</ModalContent>
 		</ModalWrapper>,
