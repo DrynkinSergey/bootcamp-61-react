@@ -18,6 +18,7 @@ const initialState = {
 	loading: false,
 	error: null,
 	deletedId: null,
+	value: '',
 }
 const todoSlice = createSlice({
 	name: 'todos',
@@ -25,6 +26,9 @@ const todoSlice = createSlice({
 	reducers: {
 		setCurrentId: (state, { payload }) => {
 			state.deletedId = payload
+		},
+		setValue: (state, { payload }) => {
+			state.value = payload
 		},
 	},
 	extraReducers: builder => {
@@ -69,5 +73,5 @@ const todoSlice = createSlice({
 	},
 })
 
-export const { setCurrentId } = todoSlice.actions
+export const { setCurrentId, setValue } = todoSlice.actions
 export const todoReducer = todoSlice.reducer
