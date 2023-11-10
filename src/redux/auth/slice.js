@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
-import { loginThunk, registerThunk } from './operations'
+import { loginThunk, logoutThunk, refreshThunk, registerThunk } from './operations'
 
 const initialState = {
 	user: {
@@ -14,12 +14,22 @@ const slice = createSlice({
 	name: 'auth',
 	initialState,
 	extraReducers: builder => {
-		builder.addMatcher(isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled), (state, { payload }) => {
-			state.user.name = payload.user.name
-			state.user.email = payload.user.email
-			state.token = payload.token
-			state.isLoggedIn = true
-		})
+		builder
+
+			.addCase(logoutThunk.fulfilled, (state, { payload }) => {
+				return (state = initialState)
+			})
+			.addCase(refreshThunk.fulfilled, (state, { payload }) => {
+				state.user.name = payload.name
+				state.user.email = payload.name
+				state.isLoggedIn = true
+			})
+			.addMatcher(isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled), (state, { payload }) => {
+				state.user.name = payload.user.name
+				state.user.email = payload.user.email
+				state.token = payload.token
+				state.isLoggedIn = true
+			})
 	},
 })
 

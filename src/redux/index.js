@@ -1,32 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { todoReducer } from './todoList/todoSlice'
 import { filterReducer } from './filter/filterSlice'
-import logger from 'redux-logger'
-import { toast } from 'react-toastify'
 import { authReducer } from './auth/slice'
 
-const myLogger = store => next => action => {
-	// console.log(action)
-	if (action.payload?.todo === 'Angular') {
-		action.payload.todo = 'React'
-		setTimeout(() => {
-			toast.error('Angular is detected')
-		}, 1000)
-		setTimeout(() => {
-			toast.info('Angular was replaced to React')
-		}, 2500)
-		setTimeout(() => {
-			toast.success('Have a nice day 🔥')
-		}, 3500)
-	}
-	next(action)
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+	key: 'auth',
+	version: 1,
+	storage,
+	whitelist: ['token'],
 }
+
+const persistedReducer = persistReducer(persistConfig, authReducer)
 
 export const store = configureStore({
 	reducer: {
 		todoList: todoReducer,
 		filter: filterReducer,
-		auth: authReducer,
+		auth: persistedReducer,
 	},
-	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(myLogger),
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 })
+export const persistor = persistStore(store)

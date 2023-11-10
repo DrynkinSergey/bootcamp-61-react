@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { deleteTodoThunk, editTitleThunk, toggleTodoThunk } from '../../redux/todoList/operations'
 import { selectCurrentID, selectLoading } from '../../redux/todoList/selectors'
+import { selectIsLoggedIn } from '../../redux/auth/selectors'
 
-export const TodoCard = ({ completed, todo, id }) => {
-	const item = { completed, todo, id }
+export const TodoCard = ({ completed, text, id }) => {
+	const item = { completed, text, id }
+	const isLoggedIn = useSelector(selectIsLoggedIn)
 
 	const dispatch = useDispatch()
 	const loading = useSelector(selectLoading)
 	const currId = useSelector(selectCurrentID)
 
 	const handleChangeTodo = item => {
-		dispatch(editTitleThunk({ ...item, todo: prompt('Enter new text') }))
+		dispatch(editTitleThunk({ ...item, text: prompt('Enter new text') }))
 	}
 	return (
 		<li>
@@ -20,9 +22,9 @@ export const TodoCard = ({ completed, todo, id }) => {
 				<div className='card-body'>
 					<p
 						className={`${completed ? 'line-through ' : ' '}text-2xl mb-4 font-bold `}
-						onClick={() => handleChangeTodo(todo)}
+						onClick={() => handleChangeTodo(text)}
 					>
-						{todo}
+						{text}
 					</p>
 
 					<div className='card-actions flex items-center justify-between '>
@@ -33,12 +35,7 @@ export const TodoCard = ({ completed, todo, id }) => {
 							onChange={() => dispatch(toggleTodoThunk(item))}
 						/>
 
-						{loading && currId === id ? (
-							<button className='btn btn-primary'>
-								<span className='loading loading-spinner'></span>
-								loading
-							</button>
-						) : (
+						{isLoggedIn && (
 							<button className='btn btn-primary py-[1px] px-2' onClick={() => dispatch(deleteTodoThunk(id))}>
 								Delete
 							</button>

@@ -1,6 +1,7 @@
 import { createSlice, isAnyOf, nanoid } from '@reduxjs/toolkit'
 import moment from 'moment'
 import { addTodoThunk, deleteTodoThunk, editTitleThunk, fetchDataThunk, toggleTodoThunk } from './operations'
+import { logoutThunk } from '../auth/operations'
 
 const prepareAdd = todo => {
 	return {
@@ -33,7 +34,9 @@ const todoSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
-
+			.addCase(logoutThunk.fulfilled, (state, { payload }) => {
+				return (state = initialState)
+			})
 			.addCase(fetchDataThunk.fulfilled, (state, { payload }) => {
 				state.todos = payload
 				state.loading = false

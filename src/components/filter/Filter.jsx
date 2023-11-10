@@ -7,18 +7,16 @@ import { Button } from 'flowbite-react'
 const Filter = () => {
 	const dispatch = useDispatch()
 	return (
-		<Button.Group>
-			<div className='flex justify-center w-full'>
-				<Button onClick={() => dispatch(setFilter('all'))} color='gray'>
-					All
-				</Button>
-				<Button onClick={() => dispatch(setFilter('active'))} color='gray'>
-					Active
-				</Button>
-				<Button onClick={() => dispatch(setFilter('completed'))} color='gray'>
-					Completed
-				</Button>
-			</div>
+		<Button.Group className='flex justify-center w-full'>
+			<Button onClick={() => dispatch(setFilter('all'))} color='gray'>
+				All
+			</Button>
+			<Button onClick={() => dispatch(setFilter('active'))} color='gray'>
+				Active
+			</Button>
+			<Button onClick={() => dispatch(setFilter('completed'))} color='gray'>
+				Completed
+			</Button>
 		</Button.Group>
 	)
 }
