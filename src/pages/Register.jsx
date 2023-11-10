@@ -1,11 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { registerThunk } from '../redux/auth/operations'
 
 export const Register = () => {
+	const dispatch = useDispatch()
 	const { register, reset, handleSubmit } = useForm()
 	const submit = data => {
 		console.log(data)
+		dispatch(registerThunk(data))
 	}
 	return (
 		<div className='bg-slate-800 min-h-screen grid place-items-center'>

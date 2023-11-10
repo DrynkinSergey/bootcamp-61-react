@@ -1,11 +1,23 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
+import { loginThunk } from '../redux/auth/operations'
+import { selectIsLoggedIn, selectUser } from '../redux/auth/selectors'
+import { toast } from 'react-toastify'
 
 export const Login = () => {
+	const dispatch = useDispatch()
+	const isLoggedIn = useSelector(selectIsLoggedIn)
+	const { name } = useSelector(selectUser)
 	const { register, reset, handleSubmit } = useForm()
 	const submit = data => {
 		console.log(data)
+		dispatch(loginThunk(data))
+	}
+	if (isLoggedIn) {
+		toast.success(`Welcome ${name}`)
+		return <Navigate to='/' />
 	}
 	return (
 		<div className='bg-slate-800 min-h-screen grid place-items-center'>

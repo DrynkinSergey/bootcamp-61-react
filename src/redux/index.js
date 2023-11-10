@@ -3,6 +3,7 @@ import { todoReducer } from './todoList/todoSlice'
 import { filterReducer } from './filter/filterSlice'
 import logger from 'redux-logger'
 import { toast } from 'react-toastify'
+import { authReducer } from './auth/slice'
 
 const myLogger = store => next => action => {
 	// console.log(action)
@@ -25,6 +26,7 @@ export const store = configureStore({
 	reducer: {
 		todoList: todoReducer,
 		filter: filterReducer,
+		auth: authReducer,
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(myLogger),
 })
