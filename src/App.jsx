@@ -1,13 +1,25 @@
 import React from 'react'
 
-import { TodoList } from './components/TodoList/TodoList'
-import { Tailwind } from './components/Tailwind/Tailwind'
+import { Route, Routes } from 'react-router-dom'
+import { TodoList } from './pages/TodoList/TodoList'
+import { Tailwind } from './pages/Tailwind/Tailwind'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
+import { NotFound } from './pages/NotFound'
+import { Layout } from './components/Layout'
 
 const App = () => {
 	return (
 		<div className='bg-white min-h-screen text-black'>
-			{/* <Tailwind /> */}
-			<TodoList />
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route index element={<TodoList />} />
+					<Route path='/tailwind' element={<Tailwind />} />
+				</Route>
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='*' element={<NotFound />} />
+			</Routes>
 		</div>
 	)
 }

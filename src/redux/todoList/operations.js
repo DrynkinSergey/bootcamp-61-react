@@ -4,7 +4,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setCurrentId } from './todoSlice'
 
 // ВСтановити по замовчуванню url
-axios.defaults.baseURL = 'https://6549f1ede182221f8d52315d.mockapi.io/'
+axios.defaults.baseURL = 'https://goit-task-manager.herokuapp.com/'
+
+// axios.defaults.baseURL = 'https://6549f1ede182221f8d52315d.mockapi.io/'
 // axios.defaults.baseURL = 'http://localhost:4444'
 
 // CRUD

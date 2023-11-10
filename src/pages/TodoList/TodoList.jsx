@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form'
 
 import { TodoCard } from '../../components'
 import Filter from '../../components'
-import Modal from '../Modal/Modal'
 
 import { selectError, selectFilteredData, selectUncompleted } from '../../redux/todoList/selectors'
 import { addTodoThunk, fetchDataThunk } from '../../redux/todoList/operations'
 import { useModal } from '../../hooks/useModal'
 import { FolderInput } from 'lucide-react'
+import Modal from '../../components/Modal/Modal'
 
 export const TodoList = () => {
 	const todos = useSelector(selectFilteredData)
