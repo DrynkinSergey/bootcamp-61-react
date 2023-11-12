@@ -5,7 +5,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { loginThunk } from '../redux/auth/operations'
 import { selectIsLoggedIn, selectUser } from '../redux/auth/selectors'
 import { toast } from 'react-toastify'
-
+import { motion } from 'framer-motion'
 export const Login = () => {
 	const dispatch = useDispatch()
 	const isLoggedIn = useSelector(selectIsLoggedIn)
@@ -21,7 +21,18 @@ export const Login = () => {
 	}
 	return (
 		<div className='bg-slate-800 min-h-screen grid place-items-center'>
-			<form onSubmit={handleSubmit(submit)} className='flex flex-col gap-4 bg-white px-10 py-14 rounded-md shadow-xl'>
+			<motion.form
+				initial={{ y: 100, scale: 0 }}
+				animate={{
+					y: -100,
+					scale: 1,
+					transition: {
+						duration: 0.5,
+					},
+				}}
+				onSubmit={handleSubmit(submit)}
+				className='flex flex-col gap-4 bg-white px-10 py-14 rounded-md shadow-xl'
+			>
 				<input
 					className='border-2 border-black rounded-md px-2 py-2 text-lg'
 					placeholder='Enter the email'
@@ -43,7 +54,7 @@ export const Login = () => {
 						Lets Create it!
 					</Link>
 				</span>
-			</form>
+			</motion.form>
 		</div>
 	)
 }
