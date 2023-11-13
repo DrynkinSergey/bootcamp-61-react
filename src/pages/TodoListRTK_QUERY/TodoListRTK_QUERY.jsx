@@ -8,6 +8,7 @@ export const TodoListRTK_QUERY = () => {
 	const { register, handleSubmit } = useForm()
 
 	const [limit, setLimit] = useState(5)
+	// викликаємо хук отримуємо дані, котрі нас цікавлять (data, isLoading, isError)
 	const { data, isLoading, isError } = useGetTodosQuery(limit)
 	const [addTodo] = useAddTodoMutation()
 	const submit = ({ text }) => {

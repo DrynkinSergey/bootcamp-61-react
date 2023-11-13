@@ -9,6 +9,7 @@ import { useDeleteTodoMutation, useToggleTodoMutation, useUpdateNameMutation } f
 export const TodoCard = ({ completed, todo: text, id }) => {
 	const item = { completed, text, id }
 	const isLoggedIn = useSelector(selectIsLoggedIn)
+	// Використовуємо хуки, але повертається массив, в котрому перше значення - це наша функція для мутації
 	const [deleteTodo] = useDeleteTodoMutation()
 	const [toggleTodo] = useToggleTodoMutation()
 	const [updateName] = useUpdateNameMutation()

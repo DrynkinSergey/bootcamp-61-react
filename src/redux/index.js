@@ -19,12 +19,15 @@ const persistedReducer = persistReducer(persistConfig, authReducer)
 
 export const store = configureStore({
 	reducer: {
+		// після створення апі, треба підключити наш новий редьюсер!
+		// береться його назва reducer path та його редьюсер
 		[todoApi.reducerPath]: todoApi.reducer,
 		todoList: todoReducer,
 		filter: filterReducer,
 		auth: persistedReducer,
 	},
 	middleware: getDefaultMiddleware =>
+		// обов'язково додати мідлвар
 		getDefaultMiddleware({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
