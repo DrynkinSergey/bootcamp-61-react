@@ -14,6 +14,7 @@ export const Navbar = () => {
 				<div className='flex gap-6 '>
 					<NavLink to='/'>Home</NavLink>
 					<NavLink to='/tailwind'>Tailwind</NavLink>
+					<NavLink to='/todoRTK_Query'>RTK_QUERY</NavLink>
 
 					{isLoggedIn && <NavLink to='/todos'>Todos</NavLink>}
 				</div>

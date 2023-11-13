@@ -10,6 +10,7 @@ import { Layout } from './components/Layout'
 import { useDispatch } from 'react-redux'
 import { refreshThunk } from './redux/auth/operations'
 import { PrivateRoute } from './hoc/PrivateRoute'
+import { TodoListRTK_QUERY } from './pages/TodoListRTK_QUERY/TodoListRTK_QUERY'
 
 const App = () => {
 	const dispatch = useDispatch()
@@ -29,6 +30,7 @@ const App = () => {
 							</PrivateRoute>
 						}
 					/>
+					<Route path='/todoRTK_Query' element={<TodoListRTK_QUERY />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/tailwind' element={<Tailwind />} />

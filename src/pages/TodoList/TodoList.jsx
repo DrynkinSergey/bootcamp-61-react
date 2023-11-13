@@ -8,9 +8,7 @@ import Filter from '../../components'
 import { selectError, selectFilteredData, selectUncompleted } from '../../redux/todoList/selectors'
 import { addTodoThunk, fetchDataThunk } from '../../redux/todoList/operations'
 import { useModal } from '../../hooks/useModal'
-import { FolderInput } from 'lucide-react'
 import Modal from '../../components/Modal/Modal'
-import { selectIsLoggedIn } from '../../redux/auth/selectors'
 
 export const TodoList = () => {
 	const todos = useSelector(selectFilteredData)
