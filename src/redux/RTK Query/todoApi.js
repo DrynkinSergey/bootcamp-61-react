@@ -1,23 +1,15 @@
-// імпортуємо 2 сущності.
-// 1 - для створення апі, друга для базового url
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// Створюємо апі - об'єкт з налаштуваннями
 export const todoApi = createApi({
-	// назва майбутнього редьюсера
 	reducerPath: 'todoApi',
 	refetchOnFocus: true,
 	tagTypes: ['todos'],
-	// базовий запит
 	baseQuery: fetchBaseQuery({
-		// ставимо baseUrl
-		baseUrl: 'https://6549f1ede182221f8d52315d.mockapi.io/',
+		baseUrl: 'https://dummyjson.com/',
 	}),
-	// Оголошуємо набір ендпоінтів
 	endpoints: builder => ({
-		// getTodos як базовий запит за туду
 		getTodos: builder.query({
-			query: () => `todos`,
+			query: limit => `todos?limit=${limit}`,
 			providesTags: ['todos'],
 		}),
 		addTodo: builder.mutation({
@@ -54,7 +46,6 @@ export const todoApi = createApi({
 	}),
 })
 
-// Генерується на основі endpoints хуки з тою самою назвою, лише додається префікс use та закінчення Query або Mutation
 export const {
 	useGetTodosQuery,
 	useUpdateNameMutation,

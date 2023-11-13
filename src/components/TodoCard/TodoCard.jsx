@@ -6,7 +6,7 @@ import { selectCurrentID, selectLoading } from '../../redux/todoList/selectors'
 import { selectIsLoggedIn } from '../../redux/auth/selectors'
 import { useDeleteTodoMutation, useToggleTodoMutation, useUpdateNameMutation } from '../../redux/RTK Query/todoApi'
 
-export const TodoCard = ({ completed, text, id }) => {
+export const TodoCard = ({ completed, todo: text, id }) => {
 	const item = { completed, text, id }
 	const isLoggedIn = useSelector(selectIsLoggedIn)
 	const [deleteTodo] = useDeleteTodoMutation()
