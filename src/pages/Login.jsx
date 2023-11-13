@@ -15,10 +15,10 @@ export const Login = () => {
 		console.log(data)
 		dispatch(loginThunk(data))
 	}
-	if (isLoggedIn) {
-		toast.success(`Welcome ${name}`)
-		return <Navigate to='/' />
-	}
+	// if (isLoggedIn) {
+	// 	toast.success(`Welcome ${name}`)
+	// 	return <Navigate to='/' />
+	// }
 	return (
 		<div className='bg-slate-800 min-h-screen grid place-items-center'>
 			<motion.form
