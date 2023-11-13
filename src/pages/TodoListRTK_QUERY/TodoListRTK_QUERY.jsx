@@ -1,15 +1,17 @@
 import { useForm } from 'react-hook-form'
 
 import { TodoCard } from '../../components'
-import Filter from '../../components'
-
-import Modal from '../../components/Modal/Modal'
+import { useAddTodoMutation, useDeleteTodoMutation, useGetTodosQuery } from '../../redux/RTK Query/todoApi'
 
 export const TodoListRTK_QUERY = () => {
 	const { register, handleSubmit } = useForm()
 
+	const { data, isLoading, isError } = useGetTodosQuery()
+
+	const [addTodo] = useAddTodoMutation()
 	const submit = ({ text }) => {
 		console.log(text)
+		addTodo({ text })
 	}
 
 	return (
@@ -24,9 +26,9 @@ export const TodoListRTK_QUERY = () => {
 
 				<button className='btn btn-outline btn-primary'>Add todo</button>
 			</form>
-
+			{isLoading && <h1>Loading...</h1>}
 			<ul className='grid grid-cols-3 gap-4  mx-auto max-w-[1000px]'>
-				{[]?.map(todo => (
+				{data?.map(todo => (
 					<TodoCard key={todo.id} {...todo} />
 				))}
 			</ul>
